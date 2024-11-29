@@ -1,0 +1,160 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+
+\usepackage{mathtools, amssymb}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{Def}{Definizione}
+\newtheorem*{Oss}{Osservazione}
+\theoremstyle{plain}
+\newtheorem{Lemma}[Def]{Lemma}
+\newtheorem{Prop}[Def]{Proposizione}
+\newtheorem{Teo}[Def]{Teorema}
+\newtheorem{Cor}[Def]{Corollario}
+
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate, 1]{label = (\roman*)}
+
+
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\eset}{\varnothing}
+\newcommand{\restr}[2]{{#1}_{|_{#2}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\deff}{\coloneqq}
+\DeclareMathOperator{\Mult}{Mult}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\mrk}{mrk}
+
+
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+
+\title{Introduction to Tensor Spaces\\ Appunti del Corso}
+\author{Mirko Torresani}
+\begin{document}
+	\maketitle
+	
+Per noi gli spazi vettoriali saranno di dimensione finita, con campo base $\C$. 
+\begin{Def}
+	Il prodotto tensoriale $V_1 \otimes \dots \otimes V_n$ è definito come lo spazio $\Mult(V_1, \dots, V_n;\C)$.
+\end{Def}
+
+\begin{Def}
+	Dato un tensore $f \in V \otimes W$, il suo rango $\rk f$ è 
+	\[
+		\rk f = \min\{s \mid f = \sum_{i = 1}^s v_i \otimes w_i\}\,.
+	\]
+\end{Def}
+\begin{Prop}
+	Il rango $\rk f$ è equivalentemente definibile come
+	\begin{enumerate}
+		\item il rango del morfismo $V^* \to V$ associato a $f$;
+		\item posto $f = \sum c_{ij} v_i \otimes w_j$, con $(v_i)_i$ e $(w_j)_j$ rispettive basi, il rango di $f$ è il rango della matrice $(c_{ij})_{i,j}$.
+	\end{enumerate}
+\end{Prop}
+
+Nel caso in cui abbiamo un prodotto tensore di più spazi, le cose si complicano.
+\begin{Def}
+	Dato un elemento $f \in V_1\otimes \dots\otimes V_d$, il rango $\rk f$ è definito come
+	\[
+		\rk f = \min\{s \mid f = \sum_{j = 1}^s v_{j,1} \otimes \dots \otimes  v_{j,d}\}
+	\]
+\end{Def}
+
+Un argomento, storicamente molto importate, riguarda il \emph{calcolo del rango tensoriale}. Per una sua prima trattazione introduciamo la seguente notazione: se $f$ è un vettore in $V_1 \otimes \dots \otimes V_d$, allora $f$ induce mappe 
+\[
+	f_k \colon V_k^\ast \to \bigotimes_{i \neq k} V_i \quad f_k^\dagger \colon \bigotimes_{i \neq k} V_i^* \to V_k
+\]
+per ogni $k$.
+\begin{Def}
+	Un tensore $f \in V_1 \otimes \dots \otimes V_d$ si dice $V_i$-conciso, o $i$-conciso, se $f_i$.
+\end{Def}
+\begin{Def}
+	Il multi-rango di $f$ è definito come
+	\[
+		\mrk f = (\rk f_1, \dots, \rk f_d) \eqqcolon (r_1, \dots, r_d) \,,
+	\]
+	dove $\rk f_k$ è il rango di $f_k$ come mappa lineare (o equivalentemente il rango della mappa trasporta $f_k^\dagger$).
+\end{Def}
+
+Per il resto della trattazione useremo la \emph{notazione di Einstein: quando lo stesso indice compare come pedice e apice, allora viene intesa una sommatoria rispetto a quell'indice, se non diversamente indicato}.
+\begin{Prop}
+	Sia $f$ un tensore, allora 
+	\[
+		\max_i r_i \le \rk f \le \min_i \prod_{j \neq i} r_j
+	\]
+\end{Prop}
+\begin{proof}
+	Sia $r$ il rango di $f$, e poniamo 
+	\[
+		f = \sum_{i=1}^r v_{1,i}\otimes\dots\otimes v_{d,i}\,.
+	\]
+	L'immagine della funzione trasporta $f_k^\dagger$, da $\bigotimes_{i \neq k}V_i^\ast \to V_k$, è contenuta nel generato $\ang{v_{k,1}, \dots, v_{k,r}}$, e quindi l'immagine ha dimensione ha al più dimensione $r$.
+	
+	Se $\{u_{i,1}, \dots, u_{i,r_i}\}$ è una base per l'immagine di $f_i^\dagger$, allora $f$ si può scrivere come
+	\[
+		f = \alpha^{j_1, \dots, j_d}\,u_{1,j_1}\otimes \dots \otimes u_{d,j_d}
+	\]
+	e per ogni $k$ 
+	\[
+		f = u_{1,j_1}\otimes \dots \otimes u_{k-1, j_{k-1}}\otimes \left[\sum_{j_k=1}^{r_k}\alpha^{j_1,\dots, j_d}u_{k,j_k}\right]\otimes u_{k+1, j_{k+1}}\otimes \dots \otimes u_{d,j_d}\,.
+	\]
+	Conseguentemente per ogni $k$, il rango $r$ è al più $\prod_{i \neq k}r_i$.
+\end{proof}
+\begin{Cor}
+	Se $\rk f = 1$, allora $\rk f_k = 1$ per ogni $k$.
+\end{Cor}
+\begin{Cor}
+	Fissato un certo $k$, se $r_j = 1$ per ogni $j \neq k$ allora $\rk f_k = \rk f = 1$.
+\end{Cor}
+\begin{Prop}
+	Sia $f$ un tensore 1-conciso, tale che $r_1 \ge \dots \ge r_d$ e che $\rk f = r_1$. Allora $f_1(V_1^*)$ è generato precisamente da $r_1$ tensori indecomponibili in $V_2 \otimes \dots \otimes V_d$.
+\end{Prop}
+\begin{proof}
+	Sappiamo che $f = \sum_{i =1}^{r_1}v_{1,i}\otimes\dots\otimes v_{d,i}$ via vettori arbitrari. Conseguentemente, l'immagine di
+	\[
+		f_1^\dagger \colon \bigotimes_{i > 1} V_i^\ast \to V_1\,
+	\]
+	è generata da $\{v_{1,1}, \dots, v_{1,r_1}\}$. Siccome il rango di $f_1$, e quindi quello di $f_1^\dagger$, è per ipotesi $r_1$, quei vettori devono essere necessariamente indipendenti. Inoltre, per ipotesi, il tensore $f$ è 1-conciso, e quindi $f_1$ è iniettivo. In definitiva, $\dim V_1^* = \dim V_1 = r_1$ e $\{v_{1,1}, \dots, v_{1,r_1}\}$ formano una base di $V_1$. 
+	
+	Consideriamo quindi la base duale $\{v_1^1, \dots, v_1^{r_1}\}$ di $V_1^*$. Per costruzione
+	\[
+		f(V_1^*) = \ang{f(v_1^1), \dots, f(v_1^{r_1})} = \ang{v_{2,i}\otimes\dots\otimes v_{d,i}}_{i = 1,\dots, r_1}\,. \qedhere
+	\]
+\end{proof}
+
+Come non-esempio consideriamo $\C^2 \otimes \C^2 \otimes \C^2$, ed il tensore
+\[
+	f \deff e_0 \otimes e_0 \otimes e_1 + e_0 \otimes e_1 \otimes e_0 \otimes e_1 \otimes e_0 \otimes e_0 \,.
+\]
+Si può osservare che in effetti è 1-conciso, e che 
+\[
+	f(V_1^\ast) = \ang{e_0\otimes e_1 + e_1 \otimes e_0, e_0 \otimes e_0}\,.
+\]
+Tuttavia quest'ultima espressione non può essere ricondotta ad uno span di tensori indecomponibili. Inoltre, $\mrk f$ è $(2,2,2)$. Conseguentemente, $\rk f = 3$ come ci si può immaginare.
+
+\begin{Prop}
+	Sia $f \in V_1 \otimes\dots\otimes 	V_d$. Il rango di $f$ coincide col minimo numero di elementi indecomponibili necessari per generare uno spazio che contiene $f_1(V_1^\ast)$.
+\end{Prop}
+\begin{proof}
+	Se $r$ è il rango di $f$, allora $f$ si scrive come $\sum_{i = 1}^r v_{1,i}\otimes \dots \otimes v_{d,i}$ e conseguentemente $f_1(V_1^\ast)$ è contenuto in $\ang{v_{2,i}\otimes\dots\otimes v_{d,i}}_{i=1}^r$.
+	
+	D'altra parte, supponiamo che $f_1(V_1^*)$ sia contenuto in $\ang{v_{2,i}\otimes\dots\otimes v_{d,i}}_{i=1}^r$. Fissiamo una base $\{v_{1,1}, \dots, v_{1,m}\}$ di $V_1$, ed una conseguente base duale. Allora
+	\[
+		f(v_1^k) = \alpha^{k,i}\,v_{2,i}\otimes\dots\otimes v_{d,i}\quad 1\le k\le r,
+	\]
+	e 
+	\[
+		f = ì\alpha^{k,i}\,v_{1,k}\otimes v_{2,i}\otimes\and\otimes v_{d,i}\,.\qedhere
+	\]
+\end{proof}
+
+\end{document}

@@ -1,0 +1,1 @@
+Questa repository contiene appunti del corso di dottorato 24/25 "Introduction to Tensor Spaces" svolto dai Prof. Ottavini e Flavi all'Università di Firenze.
