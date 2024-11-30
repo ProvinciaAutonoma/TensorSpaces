@@ -8,7 +8,7 @@
 
 \usepackage{amsthm}
 \theoremstyle{definition}
-\newtheorem{Def}{Definizione}
+\newtheorem{Def}{Definizione}[section]
 \newtheorem*{Oss}{Osservazione}
 \theoremstyle{plain}
 \newtheorem{Lemma}[Def]{Lemma}
@@ -21,18 +21,26 @@
 
 
 \DeclarePairedDelimiter{\ang}{\langle}{\rangle}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand{\zero}{\mathbf{0}}
 \newcommand{\eset}{\varnothing}
 \newcommand{\restr}[2]{{#1}_{|_{#2}}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\deff}{\coloneqq}
 \DeclareMathOperator{\Mult}{Mult}
 \DeclareMathOperator{\rk}{rk}
 \DeclareMathOperator{\mrk}{mrk}
+\DeclareMathOperator{\minrkop}{minrk}
+\newcommand{\minrk}[4]{\minrkop(#1 \!\!\!\mod #2\ #3\ #4)}
 
+\usepackage[autostyle, italian=guillemets]{csquotes}
+\usepackage[backend=biber, style=numeric, hyperref, giveninits=true]{biblatex}
+	\addbibresource{TensorSpaces.bib}
+	\DeclareFieldFormat{url}{\url{#1}}
 
 \usepackage{hyperref}
 \hypersetup{hidelinks}
@@ -41,7 +49,7 @@
 \author{Mirko Torresani}
 \begin{document}
 	\maketitle
-	
+\section{Fatti Introduttivi}
 Per noi gli spazi vettoriali saranno di dimensione finita, con campo base $\C$. 
 \begin{Def}
 	Il prodotto tensoriale $V_1 \otimes \dots \otimes V_n$ è definito come lo spazio $\Mult(V_1, \dots, V_n;\C)$.
@@ -149,12 +157,191 @@ Tuttavia quest'ultima espressione non può essere ricondotta ad uno span di tens
 	
 	D'altra parte, supponiamo che $f_1(V_1^*)$ sia contenuto in $\ang{v_{2,i}\otimes\dots\otimes v_{d,i}}_{i=1}^r$. Fissiamo una base $\{v_{1,1}, \dots, v_{1,m}\}$ di $V_1$, ed una conseguente base duale. Allora
 	\[
-		f(v_1^k) = \alpha^{k,i}\,v_{2,i}\otimes\dots\otimes v_{d,i}\quad 1\le k\le r,
+		f_1(v_1^k) = \alpha^{k,i}\,v_{2,i}\otimes\dots\otimes v_{d,i}\quad 1\le k\le r,
 	\]
 	e 
 	\[
-		f = ì\alpha^{k,i}\,v_{1,k}\otimes v_{2,i}\otimes\and\otimes v_{d,i}\,.\qedhere
+		f = \alpha^{k,i}\,v_{1,k}\otimes v_{2,i}\otimes\dots\otimes v_{d,i}\,.\qedhere
 	\]
 \end{proof}
 
+Consideriamo ora il caso in cui tensoriamo solo per \emph{tre} spazi.
+\begin{Def}
+	Siano $A$, $B$ e $C$ tre spazi vettoriali su $\C$. Inoltre sia $\{a_1, \dots, a_n\}$ una base di $A$, e sia $V$ un sottospazio di $B \otimes C$ con base $\{v_1, \dots, v_m\}$. Una \emph{modificazione} di $f \in A \otimes B \otimes C$ è una somma della forma
+	\[
+		f + \sum_{i,j} a_i \otimes v_j\,.
+	\]
+	Analogo per $V$ in $A \otimes B$ o in $A \otimes C$.
+\end{Def}
+\begin{Def}
+	Dato $V_1 \subseteq B \otimes C$, $V_2 \subseteq A \otimes C$ e $V_3 \subseteq A \otimes B$ il \emph{rango minimale modulo tre sottospazi $V_1$, $V_2$ e $V_3$} è 
+	\[
+		\minrk{f}{V_1}{V_2}{V_3} \deff \min \{\rk \tilde{f} \mid \tilde{f} \text{ modificazione ottenuta da un singolo } V_i\}\,.
+	\]
+\end{Def}
+\begin{Prop}
+	Sia $f \in A \otimes B \otimes C$ un tensore conciso di rango $r$, e poniamo $f = \sum_{k=1}^m g_k \otimes c_k$ con $g_i \in A \otimes B$ e $\{c_1, \dots, c_{m}\}$ una base di $C$. Se $g_1 \neq 0$, esistono constanti $\lambda_2, \dots, \lambda_m \in \C$ tali che 
+	\[
+		\hat{f} = \sum_{j=2}^{m}(g_j - \lambda_j g_1) \otimes  c_j \in A \otimes B \otimes (c_1^\bot)^*
+	\]
+	ha rango al più $r-1$. Se $\rk g_1 = 1$, allora $\hat{f}$ ha rango almeno $r-1$ qualunque siano le costanti.
+\end{Prop}
+\begin{proof}
+	Sappiamo che esistono $h_1, \dots, h_r$, tensori di rango 1 in $A \otimes B$, che generano uno spazio contenente $f_3(C^*)$. Quindi
+	\[
+		g_j = \alpha^{j,t}\,h_t \in A \otimes B.
+	\]
+	
+	Conseguentemente
+	\[
+		f = \alpha^{j,t}\, h_t \otimes  c_j\,.
+	\]
+	Possiamo assumere, senza perdita di generalità, $\alpha^{1,1} \neq 0$, e porre $\lambda_j \deff \alpha^{j,1}/\alpha^{1,1}$. Otteniamo quindi
+	\[
+		\begin{split}
+			\hat{f} &= \sum_{j=2}^m(g_j - \lambda_jg_1)\otimes c_j\\
+			&= \sum_{j=2}^m \left[\alpha^{j,t}h_t - \frac{\alpha^{j,1}}{\alpha^{1,1}}\,\alpha^{1,t}h_t \right]\otimes c_j\\
+			&= \sum_{j=2}^m  \left[\sum_{t=2}^r\left( \alpha^{j,t} - \frac{\alpha^{j,1}\alpha^{1,t}}{\alpha^{1,1}}\right)h_t  \right] \otimes c_j
+		\end{split}\,.
+	\]
+	Ergo $\hat{f}_3(c_1^\bot)$ è contenuto in $\ang{h_2, \dots, h_r}$, che uno span di tensori di rango 1. Quindi $\hat{f}$ ha rango al più $r-1$.
+	
+	Se il rango di $g_1 \in A \otimes B$ è 1, allora possiamo tranquillamente porre $h_1 = g_1$. In questo caso $\alpha^{1,t}= 0$ per ogni $t > 1$ e $\hat{f}$ assume la forma seguente, \emph{indipendentemente dalle costanti $\lambda_j \in \C$}:
+	\[
+		\hat{f} = \sum_{j=2}^m \sum_{t=2}^r\alpha^{j,t}\,h_t\otimes c_j = \sum_{t = 2}^th_t \otimes \left[\sum_{j=2}^m \alpha^{j,t}\, c_j\right]\,.
+	\]
+	
+	Ma questo implica che $\hat{f}_3(c_1^\bot) $ coincide con $\ang{h_2, \dots, h_r}$, da cui
+	\[
+		\rk \hat{f} \ge \rk\hat{f}_3 = r-1\,.\qedhere
+	\]
+\end{proof}
+\begin{Cor}
+	Sia $f \in A \otimes B \otimes  C$, e sia $f$ un tensore $C$-conciso. Fissato un sottospazio $W$ di $C^*$, allora
+	\[
+		\rk f \ge \minrk{f}{0}{0}{f_3(W)} + \dim W\,,
+	\]
+	e l'uguaglianza si ottiene se $f(W)$ è generato da tensori di rango 1.
+\end{Cor}
+\begin{proof}
+	Applichiamo la proposizione precedente per un numero di volte pari a $\dim W$.
+\end{proof}
+\begin{Cor}
+	Se $f \in A \otimes B \otimes C$ è conciso, e $U \subseteq A^*$, $V \subseteq B^*$, $W \subseteq C^*$ sono sottospazi, allora
+	\[
+		\rk f \ge \minrk{f}{f(U)}{f(V)}{f(W)} + \dim U + \dim V + \dim W\,,
+	\]
+	e se $f(U)$, $f(V)$, $f(W)$ sono generati da tensori dai rango 1, vale l'uguaglianza.
+\end{Cor}
+
+\section{Algebre Tensoriali}
+
+Parliamo brevemente di algebre tensoriali.
+\begin{Def}
+	Dato un gruppo $G$, un $G$-modulo è, in questo contesto, un $\C[G]$-modulo nel senso dell'algebra commutativa.
+\end{Def}
+\begin{Def}
+	Se $G$ agisce su un $\C$-spazio $V$ e $W$ (tramite un morfismo $G \underset{\rho}{\to} GL(V)$)
+	\begin{enumerate}
+		\item $G$ agisce su $V^*$ via $\rho^*(g) = [\rho(g)^{-1}]^\dagger$;
+		\item $G$ agisce su $V \oplus W$ via $g \cdot (v,w) = (g\cdot v, g\cdot w)$;
+		\item $G$ agisce su $V \otimes W$ via $g \cdot (v\otimes w) = (g\cdot v)\otimes (g\cdot w)$.
+	\end{enumerate}
+\end{Def}
+\begin{Def}
+	L'algebra tensoriale $(TV, \otimes)$ è definita come
+	\[
+		TV \deff \bigoplus_{d \ge 0} V^{\otimes d}\,.
+	\]
+\end{Def}
+
+Vogliamo definire \emph{l'algebra simmetrica}. 
+\begin{Def}
+	I $d$-tensori simmetrici sono 
+	\[
+		S^d V \deff \{\alpha \in V^{\otimes d} \mid \sigma \cdot \alpha = \alpha\ \forall \sigma \in S_d \}\,,
+	\]
+	e l'algebra simmetrica è
+	\[
+		SV \deff \bigoplus_{d \ge 0} S^{d}V\,.
+	\]
+\end{Def}
+
+Definiamo ora la \emph{proiezione simmetrica $\pi_S$} da $TV$ in $SV$:
+\[
+	\pi_S(v_1 \otimes\dots\otimes v_d) = \frac{1}{d!}\sum_{\sigma \in S_d}\sigma \cdot (v_1\otimes\dots\otimes v_d)\,.
+\]
+\begin{Prop}
+	Lo spazio $S^dV$ è generato dall'insieme $\{v^{\otimes d} \mid v \in V\}$.
+\end{Prop}
+\begin{proof}
+	Basta osservare che 
+	\[
+		\sum_{\sigma \in S_d} v_{\sigma(1)}\otimes \dots \otimes v_{\sigma(d)} = \sum_{\mathclap{\substack{I \subseteq \{1,\dots, d\}\\I \neq \eset}
+		}} (-1)^{d -\abs{I}} \bigg[\sum_{i \in I}v_i\bigg]^{\otimes d}\,,
+	\]
+	e che per ogni $\alpha \in S^dV$ la somma precedente coincide con $d!\cdot \alpha$.
+\end{proof}
+
+L'algebra $SV$ risulta effettivamente un algebra, grazie all'introduzione del \emph{prodotto simmetrico $\odot$} su $SV$ come
+\[
+	\alpha \odot \beta = \pi_S(\alpha\otimes\beta)	\,.
+\]
+
+In seguito sarà molto importante parlare di \emph{decomposizione di tensori}. Un esempio in quella direzione viene ai prossimi risultati.
+\begin{Prop}
+	Dato un tensore $f \in S^2V$ di rango $r$, esso ammette una decomposizione della forma
+	\[
+		f = \sum_{i=1}^r v_i \otimes v_i\,.
+	\]
+\end{Prop}
+\begin{Prop}
+	La rappresentazione di $GL(V)$ sullo spazio vettoriale $S^2V$ è irriducibile.
+	\begin{proof}
+		Sia $W \subseteq S^2V$ un $GL(V)$-sottomodulo contenente un tensore $f$ non nullo. Sicuramente possiamo scrivere
+		\[
+			f = \sum_{i=1}^rv_i \otimes v_i \quad v_i \in V, \lambda_i \in \C\,.
+		\]
+		con $v_1,\dots, v_r$ indipendenti.
+		
+		Sia un morfismo $g \in GL(V)$ per cui $g(v_1) = 2v_1$ e $g(v_i) = v_i$ per ogni $i > 1$. Allora vale che 
+		\[
+			W \ni \frac{1}{3}(g \cdot f - f) = v_1\otimes v_1\,,
+		\]
+		e quindi 
+		\[
+			S^2V = \ang{(g\cdot v_1) \otimes (g\cdot v_1)}_{g \in GL(V)} \subseteq W\qedhere
+		\]
+	\end{proof}
+\end{Prop}
+
+Possiamo analogamente definire un \emph{rango simmetrico}.
+\begin{Def}
+	Il rango simmetrico di $f \in S^dV$ è
+	\[
+		\rk_S f \deff \min\{r \in \N \mid f = v_1^{\otimes d} + \dots + v_r^{\otimes d}\}\,.
+	\]
+\end{Def}
+Sicuramente $\rk f \le \rk_S f$, e vale l'uguaglianza per $d = 2$. È una congettura se sono uguali, detta \emph{congettura di Comon}. Nel 2017 sembra essere stato trovato un controesempio \cite{Shitov2007}.
+
+\begin{Prop}
+	Posto $\C[V]$ l'algebra delle funzioni $V \to \C$ generata da $V^*$, lo spazio $S^dV^*$ è isomorfo a $\C[V]_d \simeq \C[x_1, \dots, x_n]_d$.
+\end{Prop}
+\begin{proof}
+	La mappa che funziona è 
+	\[
+		\Phi \colon S^dV^* \to \C[V]_d\,, \ \phi \mapsto f_\phi\,,
+	\]
+	con
+	\[
+			f_\phi(v) = \phi(v,\dots, v)\,. \qedhere
+	\]
+\end{proof}
+\begin{Def}[Waring rank]
+	Per ogni $f \in \C[x_1, \dots, x_n]_d$ il rango di Waring è 
+	\[
+		\rk_S f = \min\{r \in \N \mid f = l_1^f + \dots + l_r^d, \ l_i \text{ forma lineare}\}\,.
+	\]
+\end{Def}
+\printbibliography
 \end{document}
