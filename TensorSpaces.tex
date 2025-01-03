@@ -23,6 +23,7 @@
 \DeclarePairedDelimiter{\ang}{\langle}{\rangle}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \renewcommand{\epsilon}{\varepsilon}
+\newcommand{\PP}{\mathbb{P}}
 \newcommand{\zero}{\mathbf{0}}
 \newcommand{\eset}{\varnothing}
 \newcommand{\restr}[2]{{#1}_{|_{#2}}}
@@ -33,6 +34,8 @@
 \newcommand{\deff}{\coloneqq}
 \DeclareMathOperator{\Mult}{Mult}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Seg}{Seg}
 \DeclareMathOperator{\rk}{rk}
 \DeclareMathOperator{\mrk}{mrk}
 \DeclareMathOperator{\minrkop}{minrk}
@@ -427,5 +430,112 @@ Gli elementi di $(\C^2)^{\otimes 3}$ hanno le orbite secondo $(GL_2(\C))^3$ che 
 	\bottomrule
 \end{array}
 \]
+\section{Varietà Algebriche Tensoriali}
+\begin{Def}
+	Sia $Z \subseteq \PP V$ un sottoinsieme dello spazio proiettivo su $V$. Il \emph{cono affine} è $\hat{V} \deff \pi^{-1}(Z)$, con $\pi$ la proiezione proiettiva.
+\end{Def}
+\begin{Def}
+	Se $X$ l'insieme di zeri comuni di $S \subseteq S^\bullet V^\ast$, allora poniamo $X \deff Z(S)$.
+\end{Def}
+
+\begin{Def}
+	Viceversa, dato $A \subseteq \PP V$, 
+	\[
+		I(A) \deff \{F \in S^\bullet V^\ast \mid F(a) = 0\ \forall a \in \hat{A}\}
+	\]
+	è \emph{l'ideale di $A$}.
+\end{Def}
+\begin{Def}
+	L'embedding di Segre è dato da
+	\[
+	\begin{split}
+		\Seg \colon \PP A \times \PP B &\to \PP (A \otimes B)\\
+		([a], [b]) &\mapsto [a \otimes b]
+	\end{split}
+	\]
+\end{Def}
+L'immagine è data dalla proiezione delle matrici $\dim A \times \dim B$ di rango $1$, cioè dal luogo di zeri di $\Lambda^2A^\ast \otimes \Lambda^2B^\ast \subseteq S^2(A \otimes B)$.
+\begin{Prop}
+	In generale l'analoga mappa da $\PP A_1 \times \dots \times \PP A_n $ a $\PP(A_1 \otimes\dots\otimes A_n)$ dà come immagine un'insieme chiuso.
+\end{Prop}
+\begin{Def}
+	La $d$-mappa di Veronese è
+	\[
+	\begin{split}
+		v_d \colon \PP V &\to \PP(S^dV) \\
+		[a] &\mapsto [a^{\otimes d}]
+	\end{split}
+	\]
+\end{Def}
+
+L'immagine è costituita da $\Seg((\PP V)^n) \cap \PP(S^d V)$, e quindi è una varietà proiettiva.
+
+\begin{Def}
+	Data una mappa $f$ da $V$ in sé, $f^{\wedge m}$ è la naturale endomorfismo di $\Lambda^m V$. Se $m = \dim V$, $f^{\wedge m}$ è la moltiplicazione per $\det(f)$.
+\end{Def}
+\begin{Def}
+	La Grasmanniana è 
+	\[
+		\Gr(r,V) \deff \{[v_1 \wedge \dots \wedge v_r] \mid v_f \in V\} \subseteq \PP(\Lambda^r V).
+	\]
+\end{Def}
+Osserviamo che nel proiettivo un tale prodotto wedge è insensibile a cambi di base del sottospazio generato. La Grassmaniana parametrizza quindi i sottospazi 
+
+\begin{Def}
+	Per ogni $\phi \in V^\ast$ e $v \in V$, definiamo $\phi \,\lrcorner \,v \deff \phi(v)$. Per induzione se $\phi \in V^\ast$, $v \in V$ e $f \in \Lambda^k V$ imponiamo
+	\[
+		\phi\,\lrcorner\,(v \wedge f) \deff (\phi \,\lrcorner\, v) \wedge f - v \wedge (\phi \,\lrcorner\, f)\,.
+	\]
+	Infine imponiamo $(\phi \wedge g)\,\lrcorner\, f \deff \phi\,\lrcorner\,(g\, \lrcorner\, f)$.
+\end{Def}
+\begin{Prop}
+	$f \in \Lambda^r V$ può essere scritta come un prodotto wedge $w_1 \wedge\dots\wedge w_r$ se e solo se 
+	\[
+		(\psi \,\lrcorner\,f) \wedge f = 0\ \forall \psi \in \Lambda^{r-1}V^*
+	\]
+\end{Prop}
+In particolare, se 
+\[
+	f = p_{i_1\dots i_r}v^{i_1} \wedge \dots \wedge v^{i_r}
+\] 
+allora l'equazione diventa
+\[
+	\sum_{k=1}^{r+1}(-1)^kp_{i_1\dots i_{r-1}j_k}\,p_{j_1\dots j_{k-1}j_{k+1}\dots j_{r+1}} = 0\,,
+\]
+per ogni scelta di multiindici $(i_1, \dots, i_k)$ e $(j_1, \dots, j_k)$. Avendo ottenuto una equazione polinomiale, $\Gr(r,V)$ è una varietà proiettiva.
+
+Parliamo ora di spazi tangenti. 
+\begin{Def}
+	Sia $M \subseteq V$ un sottoinsieme e $v \in V$. Allora
+	\[
+		\hat{T}_vM \deff \Big\{\frac{d\gamma}{dt}\Big|_{t = 0} \mid \gamma \colon \C \to M \text{ curva liscia}\Big\}
+	\]
+	è lo spazio tangente.
+\end{Def}
+Osserviamo che lo spazio tangente su $v$ o su $\lambda v$ rimane invariato per $\lambda \in \C^*$.
+
+\begin{Def}
+	Sia $X \subseteq \PP V$ una varietà proiettiva. Un punto $v \in X$ si dice liscio se esiste un insieme aperto $U$ (di Zarinksi) su cui lo spazio tangente $\hat{T}_w X$ ha la stessa dimensione per ogni $w \in U$. L'insieme dei punti singolari è un chiuso proiettivo.
+\end{Def}
+
+Poniamo quindi 
+\[
+	\dim X \deff \dim (\hat{T}_v X)-1
+\]
+con $v$ un punto liscio.
+
+\begin{Prop}
+	Vale che
+	\[
+		\hat{T}_{v_1\otimes \dots \otimes v_d} \Seg(\PP V_1 \times \dots \times \PP V_d) = \sum_{j =1}^d
+ v_1 \otimes \dots \otimes v_{j-1}\otimes V_j\otimes v_{j+1} \otimes \dots \otimes v_d\,.
+ 	\]
+\end{Prop}
+\begin{Prop}
+	Analogamente vale che
+	\[
+		\hat{T}_{[v^{\otimes d}]} v_d(\PP V) = \{[v^{\otimes\, (d-1)}\otimes w] \mid w \in V\}\,.
+	\]
+\end{Prop}
 \printbibliography
 \end{document}
