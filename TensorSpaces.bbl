@@ -19,7 +19,41 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{Shitov2007}{online}{}{}
+    \entry{Draisma2024}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=e4490bbcc5d9010572e2141a8fcae296}{%
+           family={Draisma},
+           familyi={D\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{e4490bbcc5d9010572e2141a8fcae296}
+      \strng{fullhash}{e4490bbcc5d9010572e2141a8fcae296}
+      \strng{fullhashraw}{e4490bbcc5d9010572e2141a8fcae296}
+      \strng{bibnamehash}{e4490bbcc5d9010572e2141a8fcae296}
+      \strng{authorbibnamehash}{e4490bbcc5d9010572e2141a8fcae296}
+      \strng{authornamehash}{e4490bbcc5d9010572e2141a8fcae296}
+      \strng{authorfullhash}{e4490bbcc5d9010572e2141a8fcae296}
+      \strng{authorfullhashraw}{e4490bbcc5d9010572e2141a8fcae296}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Applied Algebra and Geometry}
+      \field{number}{1}
+      \field{title}{Erratum: A Counterexample to Comon’s Conjecture}
+      \field{volume}{8}
+      \field{year}{2024}
+      \field{pages}{225\bibrangedash 225}
+      \range{pages}{1}
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/23M1623781
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/23M1623781
+      \endverb
+    \endentry
+    \entry{Shitov2018}{article}{}{}
       \name{author}{1}{}{%
         {{hash=69e37069cb469ffcf7bc14a369dfa5df}{%
            family={Shitov},
@@ -39,13 +73,18 @@
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{A counterexample to Comon's conjecture}
-      \field{year}{2017}
+      \field{journaltitle}{SIAM Journal on Applied Algebra and Geometry}
+      \field{number}{3}
+      \field{title}{A Counterexample to Comon's Conjecture}
+      \field{volume}{2}
+      \field{year}{2018}
+      \field{pages}{428\bibrangedash 443}
+      \range{pages}{16}
       \verb{urlraw}
-      \verb https://arxiv.org/abs/1705.08740v2
+      \verb https://doi.org/10.1137/17M1131970
       \endverb
       \verb{url}
-      \verb https://arxiv.org/abs/1705.08740v2
+      \verb https://doi.org/10.1137/17M1131970
       \endverb
     \endentry
   \enddatalist

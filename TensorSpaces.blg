@@ -1,15 +1,15 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'TensorSpaces.blg'
-[125] biber-MSWIN64:340> INFO - === 
-[173] Biber.pm:420> INFO - Reading 'TensorSpaces.bcf'
-[298] Biber.pm:994> INFO - Found 1 citekeys in bib section 0
-[316] Biber.pm:4463> INFO - Processing section 0
-[331] Biber.pm:4654> INFO - Looking for bibtex file 'TensorSpaces.bib' for section 0
-[398] bibtex.pm:1713> INFO - LaTeX decoding ...
-[418] bibtex.pm:1519> INFO - Found BibTeX data source 'TensorSpaces.bib'
-[502] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
-[502] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[503] Biber.pm:4283> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'it-IT'
-[503] Biber.pm:4289> INFO - No sort tailoring available for locale 'it-IT'
-[510] bbl.pm:676> INFO - Writing 'TensorSpaces.bbl' with encoding 'UTF-8'
-[511] bbl.pm:779> INFO - Output to TensorSpaces.bbl
+[165] biber-MSWIN64:340> INFO - === 
+[223] Biber.pm:420> INFO - Reading 'TensorSpaces.bcf'
+[409] Biber.pm:994> INFO - Found 2 citekeys in bib section 0
+[429] Biber.pm:4463> INFO - Processing section 0
+[445] Biber.pm:4654> INFO - Looking for bibtex file 'TensorSpaces.bib' for section 0
+[550] bibtex.pm:1713> INFO - LaTeX decoding ...
+[577] bibtex.pm:1519> INFO - Found BibTeX data source 'TensorSpaces.bib'
+[673] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
+[674] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[674] Biber.pm:4283> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'it-IT'
+[674] Biber.pm:4289> INFO - No sort tailoring available for locale 'it-IT'
+[692] bbl.pm:676> INFO - Writing 'TensorSpaces.bbl' with encoding 'UTF-8'
+[694] bbl.pm:779> INFO - Output to TensorSpaces.bbl

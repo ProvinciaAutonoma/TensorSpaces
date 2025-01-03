@@ -32,10 +32,13 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\deff}{\coloneqq}
 \DeclareMathOperator{\Mult}{Mult}
+\DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\rk}{rk}
 \DeclareMathOperator{\mrk}{mrk}
 \DeclareMathOperator{\minrkop}{minrk}
 \newcommand{\minrk}[4]{\minrkop(#1 \!\!\!\mod #2\ #3\ #4)}
+
+\usepackage{booktabs}
 
 \usepackage[autostyle, italian=guillemets]{csquotes}
 \usepackage[backend=biber, style=numeric, hyperref, giveninits=true]{biblatex}
@@ -288,6 +291,17 @@ L'algebra $SV$ risulta effettivamente un algebra, grazie all'introduzione del \e
 	\alpha \odot \beta = \pi_S(\alpha\otimes\beta)	\,.
 \]
 
+\begin{Oss}
+	Se $v_1, \dots, v_n$ è una base di $V$, una base di $S^dV$ è data da
+	\[
+		\mathcal{B}_{S^dV} = \{v_{j_1}\odot\dots\odot v_{j_d}\}_{1\le j_1 \le \dots \le j_d\le n}
+	\]
+	e quindi
+	\[
+		\dim S^dV = \binom{n+d-1}{d}\,.
+	\]
+\end{Oss}
+
 In seguito sarà molto importante parlare di \emph{decomposizione di tensori}. Un esempio in quella direzione viene ai prossimi risultati.
 \begin{Prop}
 	Dato un tensore $f \in S^2V$ di rango $r$, esso ammette una decomposizione della forma
@@ -322,9 +336,10 @@ Possiamo analogamente definire un \emph{rango simmetrico}.
 		\rk_S f \deff \min\{r \in \N \mid f = v_1^{\otimes d} + \dots + v_r^{\otimes d}\}\,.
 	\]
 \end{Def}
-Sicuramente $\rk f \le \rk_S f$, e vale l'uguaglianza per $d = 2$. È una congettura se sono uguali, detta \emph{congettura di Comon}. Nel 2017 sembra essere stato trovato un controesempio \cite{Shitov2007}.
+Sicuramente $\rk f \le \rk_S f$, e vale l'uguaglianza per $d = 2$. È una congettura se sono uguali, detta \emph{congettura di Comon}. Nel 2018 Shitov \cite{Shitov2018} ha pensato di trovare un controesempio, smentito da sé stesso nel 2024 \cite{Draisma2024}.
 
 \begin{Prop}
+	
 	Posto $\C[V]$ l'algebra delle funzioni $V \to \C$ generata da $V^*$, lo spazio $S^dV^*$ è isomorfo a $\C[V]_d \simeq \C[x_1, \dots, x_n]_d$.
 \end{Prop}
 \begin{proof}
@@ -340,8 +355,77 @@ Sicuramente $\rk f \le \rk_S f$, e vale l'uguaglianza per $d = 2$. È una conget
 \begin{Def}[Waring rank]
 	Per ogni $f \in \C[x_1, \dots, x_n]_d$ il rango di Waring è 
 	\[
-		\rk_S f = \min\{r \in \N \mid f = l_1^f + \dots + l_r^d, \ l_i \text{ forma lineare}\}\,.
+		\rk_S f = \min\{r \in \N \mid f = l_1^d + \dots + l_r^d, \ l_i \text{ forma lineare}\}\,.
 	\]
 \end{Def}
+
+\begin{Def}
+	I $d$-tensori antisimmetrici sono 
+	\[
+	\Lambda^d V \deff \{\alpha \in V^{\otimes d} \mid \sigma \cdot \alpha =\sgn(\sigma)\, \alpha\ \forall \sigma \in S_d \}\,,
+	\]
+	e l'algebra antisimmetrica è
+	\[
+	\Lambda V \deff \bigoplus_{d \ge 0} \Lambda^{d}V\,.
+	\]
+\end{Def}
+
+Definiamo la proiezione antisimmetrica $\pi_\Lambda$ come
+\[
+	\pi_\Lambda(v_1 \otimes\dots\otimes v_d) = \frac{1}{d!}\sum_{\sigma \in S_d}\sgn(\sigma)\,v_{\sigma(1)}\otimes\dots\otimes v_{\sigma(d)}\,.
+\]
+Analogamente a quanto fatto prima definiamo il prodotto antisimmetrico (o \emph{wedge}) come
+\[
+	\alpha \wedge \beta \deff \pi_\Lambda(\alpha\otimes\beta)\,.
+\]
+\begin{Prop}
+	Un insieme finito $v_1, \dots, v_d$ è linearmente indipendente se e solo se 
+	\[
+		v_1\wedge \dots \wedge v_d = 0\,.
+	\]
+\end{Prop}
+\begin{Cor}
+	Una base $\mathcal{B}_{\Lambda^dV}$ di $\Lambda^dV$ è 
+	\[
+		\mathcal{B}_{\Lambda^dV} = \{v_{j_1}\wedge\dots\wedge v_{j_d}\}_{1\le j_1 < \dots< j_d\le n}
+	\]
+	e quindi
+	\[
+		\dim \Lambda^dV = \binom{n}{d}\,.
+	\]
+\end{Cor}
+\begin{Prop}
+	Lo spazio $\Lambda^2V$ è un $GL(V)$-modulo irriducibile.
+\end{Prop}
+
+\section{Decomposizione di Tensori}
+
+Dati due spazi $A$, $B$, lo spazio $G \deff GL(A) \times (B)$ è incluso in $GL(A\otimes B)$. Dei teoremi di semplice decomposizione sono dati dai seguenti.
+\begin{Prop}
+	Lo spazio $S^2(A\otimes B)$ si $G$-decompone come
+	\[
+		S^2(A \otimes B) = (S^2A \otimes S^2B) \oplus (\Lambda^2A \otimes \Lambda^2B)\,.
+	\]
+	Ed allo stesso modo $\Lambda^2(A\otimes B)$ si $G$-decompone come
+	\[
+		\Lambda^2(A\otimes B) = (S^2A \otimes \Lambda^2B) \oplus (S^2A \otimes \Lambda^2B)\,.
+	\]
+\end{Prop} 
+
+Gli elementi di $(\C^2)^{\otimes 3}$ hanno le orbite secondo $(GL_2(\C))^3$ che seguono la seguente tabella:
+\[
+\begin{array}{cccccc}
+	\toprule
+	\text{orbita} & r_1 & r_2 & r_3 &  \rk f & \text{rappresentante}\\
+	\midrule
+	A & 1 & 1 & 1 & 1 & a_0\otimes b_0 \otimes c_0 \\
+	B_1 & 1 & 2 & 2 & 2 & a_0\otimes b_0 \otimes c_0 + a_0\otimes b_1 \otimes c_1\\
+	B_2 & 2 & 1 & 2 & 2 & a_0\otimes b_0 \otimes c_0 + a_1\otimes b_0 \otimes c_1\\
+	B_3 & 2 & 2 & 1 & 2 & a_0\otimes b_0 \otimes c_0 + a_1\otimes b_1 \otimes c_0\\
+	W & 2 & 2 & 2 & 3 & a_0\otimes b_1 \otimes c_1 + a_1\otimes b_0 \otimes c_1 + a_1\otimes b_1 \otimes c_0\\
+	G & 2 & 2 & 2 & 2 & a_0\otimes b_0 \otimes c_0 + a_1\otimes b_1 \otimes c_1 \\
+	\bottomrule
+\end{array}
+\]
 \printbibliography
 \end{document}
