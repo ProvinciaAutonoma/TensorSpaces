@@ -31,12 +31,17 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\A}{\mathbb{A}}
 \newcommand{\deff}{\coloneqq}
+\newcommand{\CC}{\mathcal{C}}
 \DeclareMathOperator{\Mult}{Mult}
+\DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Tan}{Tan}
 \DeclareMathOperator{\Gr}{Gr}
 \DeclareMathOperator{\Seg}{Seg}
 \DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\brk}{brk}
 \DeclareMathOperator{\mrk}{mrk}
 \DeclareMathOperator{\minrkop}{minrk}
 \newcommand{\minrk}[4]{\minrkop(#1 \!\!\!\mod #2\ #3\ #4)}
@@ -537,5 +542,190 @@ con $v$ un punto liscio.
 		\hat{T}_{[v^{\otimes d}]} v_d(\PP V) = \{[v^{\otimes\, (d-1)}\otimes w] \mid w \in V\}\,.
 	\]
 \end{Prop}
+
+Parliamo ora di orbite. Sulle nostre varietà proiettive facciamo agire $G \deff SL(V)$. È il rivestimento universale (di grado finito) di $PGL(V)$. 
+\begin{Prop}[Borel]
+	Se un'azione è algebrica, allora per ogni orbita $\mathcal{O}$ la sua chiusura è ancora $G$-invaiante e 
+	\[
+		\overline{\mathcal{O}} = \mathcal{O} \cup \{\text{orbite di dimensione minore}\}.
+	\]
+\end{Prop}
+Conseguentemente, le orbite di dimensione minore sono chiuse, e se l'azione è irriducibile, essa è unica.
+
+In questa ottica delle azioni, guardiamo alle tre varietà di prima.
+\begin{enumerate}
+	\item Dato l'embedding di Veronese $v_d$, esso è $G$-equivariante, e la sua immagine è \emph{l'orbita chiusa} per l'azione di $G$ su $\PP(S^dV)$. 
+	
+	\item Per quanto riguarda, l'embedding di Segre, l'immagine è l'orbita chiusa per l'azione di $SL(V_1) \times \dots\times SL(V_d)$.
+	
+	\item Possiamo anche considerare varietà di Segre-Veronese denntro 
+	\[
+		\PP(S^{a_1}V \otimes \dots \otimes S^{a_d}V)
+	\]
+	\item Le varietà di Grassmann \emph{proiettive}, indicate come $\Gr(\PP^k, \PP V)$, possiedono delle naturali coordinate di Plücker che le immergono dentro $\PP(\Lambda^{k+1} V)$.
+\end{enumerate}
+
+Parliamo ora di \emph{varietà secanti}. Iniziamo ora con delle definizioni.
+\begin{Def}
+	Siano $X$ e $Y$ sottoinsiemi di $\PP(W)$. Il Join è definito come
+	\[
+		J(X,Y) \deff \overline{\bigcup_{\substack{x \in X \\ y \in Y}} \ang{x,y}}
+	\]
+\end{Def}
+La chiusura serve per prendere anche le tangenti come limite di secanti.
+
+
+Se $X = Y = v_3(\PP\C^2)$, dato in coordinate come ($\dim_\C S^3\C^2 = 4$)
+\[
+	[x_0, x_1] \mapsto [x_0^3, 3x_0^2x_1, 3x_0x_1^2, x_1^3]\,,
+\]
+allora $X$ prende il nome di \emph{cubica gobba}. Studiamo ora l'azione di $SL_2$ su $\PP(S^3\C^2)$. Abbiamo tre orbite che sono 
+\[
+	X,\ \Tan(X) \setminus X,\ \PP(S^3\C^2) \setminus \Tan(X)
+\]
+
+Se $f \in S^3\C^2$, allora può essere pensato come un polinomio omogeneo cubico in $x_0$ e $x_1$. Su $\C$ ricade in tre casistiche
+\begin{enumerate}
+	\item $f$ una radice tripla, e appartiene a $X$.
+	\item $f$ ha una radice singola ed una doppia, ed appartiene a $\Tan(X) \setminus X$;
+	\item $f$ ha tre radici singole, ed appartiene a $\PP(S^3\C^2) \setminus \Tan(X)$.
+\end{enumerate}
+
+Può essere dimostrato che $X \cup (\PP(S^2\C^3)\setminus \Tan(X))$ coincide esattamente con l'unione delle secanti. Detto altrimenti, $J(X,X)$ è tutto lo spazio $\PP(S^3\C^2)$.
+
+\begin{Def}
+	La varietà secante è data da 
+	\[
+		\sigma_k(X) \deff J(X, \dots, X)\,.
+	\]
+\end{Def}
+Abbiamo quindi una catena ascendente
+\[
+	X \subseteq \sigma_1(X) \subseteq \dots \subseteq \sigma_{p_0}(X) = \PP(W)\,.
+\]
+
+Se consideriamo $X$ come $\PP(V_1) \times \PP(V_2)$ dentro $\PP(V_1 \otimes V_2)$, allora
+\[
+	\sigma_r(X) = \{f \in \Hom(V_1^{\vee}, V_2) \mid \rk f \le r\}\,,
+\]
+in quanto ogni matrice di rango $r$ (in senso matriciale) può essere scritta come somma di matrici di rango 1.
+
+Si può dimostrare che la chiusura di Zarinksky di 
+\[
+	\{f \in \Hom(V_1^\vee, V2) \mid \rk f = r\}
+\]
+coincide precisamente con $\sigma_r(X)$. Questo recupera il risultato di Borel.
+
+Consideriamo ora il caso $X = v_d(\PP^1\C)$, con $d \ge 3$.
+
+Per $d = 3$ siamo di fronte alla cubica gobba. Se supponiamo di proiettare questa cubica su un piano, usando un generico punto $p \notin X$ come fuoco, osserviamo che la proiezione ha un nodo precisamente se $p$ è in una secante, o ha una cuspide precisamente quando $p$ sta in una tangente. Ma una cubica in un piano può solo avere un nodo. Quindi se $p$ sta su una secante, essa è unica. Analogamente se $p \notin X$ sta su una tangente essa è unica. Si può provare, come già detto, che $\sigma_2(X) = \PP^3\C$\,.
+
+Per $d = 4$ stiamo guardando l'immersione di $\PP^1\C$ in $\PP^4\C$. In questo caso abbiamo infinite $SL_2$-orbite, in quanto quattro radici non possono essere generalmente portate una dentro l'altra. La catena secante è della forma
+\[
+	X = \sigma_1(X) \subseteq \sigma_2(X) \subseteq \sigma_3(X) = \PP^4
+\]
+Capiamo l'equazione di $\sigma_2(X)$. Sia
+\[
+	S^2\C^{2\vee} = \{\alpha_0\partial_0^2 + 2 \alpha_1\partial_0\partial_1 + \alpha_2\partial_1^2\}
+\]
+e consideriamo la mappa
+\[
+\begin{split}
+	\CC_f \colon S^2\C^{2\vee} &\to S^2\C^2 \\
+	\partial &\mapsto \partial f
+\end{split}
+\]	
+con $f \in S^4\C^2$.
+
+Sia $\ell$ una forma lineare. Allora l'immagine di $\CC_{\ell^4}$ è $\C$-generata da $\ell^2$ ed ha dimensione 1. Inoltre,
+\[
+	\CC_{\lambda f + \mu g} = \lambda \CC_f + \mu \CC_g
+\]
+e quindi se $\ell_1$, $\ell_2$ sono due forme lineari, allora
+\[
+	\rk \CC_{\lambda_1 \ell_1^4 + \lambda_2 \ell_2^4} \le 2\,.
+\]
+Quindi la mappa precedente ha sempre determinante nullo, in quando $\dim S^2\C^2 = 3$.
+
+Conseguentemente, la varietà $\sigma_2(X)$ è contenuta in $V(\det \CC_f)$. Inoltre vale l'uguaglianza in quanto $\det \CC_f$ è un polinomio cubico irriducibile.
+
+Inoltre, $SL_2$ agisce su $S^4\C^2$, e quindi su 
+\[
+	\bigoplus_d S^d(S^4\C^2)\,.
+\]
+\begin{Prop}
+	Il sottoanello
+	\[
+		\left[\bigoplus_d S^d(S^4\C^2)\right]^{SL_2} \subseteq \bigoplus_d S^d(S^4\C^2)
+	\]
+	è un anello polinomiale completo: $\C[I,J]$, con $\deg I = 2$ e $\deg J = 3$. Questo fatto (mi fido) è molto raro in teoria degli invarianti. Inoltre come varietà algebrica è $\PP^1\C$, oltre ad essere liscia. A meno di multipli scalari $J = \det \CC_f$. 
+\end{Prop}
+
+\begin{Lemma}
+	$\dim \sigma_r(X) \le r\,\dim(X) + (r-1)$
+\end{Lemma}
+\begin{proof}
+	Consideriamo 
+	\[
+		\sigma^r(X) \deff \{(x_1, \dots, x_r, y) \mid y \in \ang{x_1, \dots, x_r}\}
+	\]
+	dentro 
+	\[
+		X \times\dots\times X\times \PP W
+	\]
+	E consideriamo le due mappe
+	\[
+		X \times\dots\times X \overset{\pi_1}{\longleftarrow} \sigma^r(X) \overset{\pi_2}{\longrightarrow} \PP W \,.
+	\]
+	
+	Notiamo che $\pi_2(\sigma^r(X)) = \sigma_r(X)$, e che $\pi_1$ è suriettiva con fibra generica $\PP^{r-1}\C$. Conseguentemente
+	\[
+	\begin{split}
+			\dim \sigma_r(X) \le \dim \sigma^r(X) &= \dim(\text{Fibra}) + \dim(X \times\dots\times X) \\
+			&= (r-1) + r\dim(X)\,. \qedhere
+	\end{split}
+	\]
+\end{proof}
+Si postula che valga l'uguaglianza.
+
+\begin{Def}
+	$X$ si dice essere $(h+1)$-difettivo se $\sigma_{h+1} X $ ha dimensione minore del minimo tra $X$ e la stima del teorema precedente.
+\end{Def}
+\begin{Lemma}[Terracini]
+	Se $x_i \in X_i$ sono punti generici, e $p \in \ang{x_1, \dots, x_{h+1}}$ è generico, allora
+	\[
+		T_pJ(X_1, \dots, X_{h+1}) = \ang{T_{x_1}X_1, \dots, T_{x_{h+1}}X_{h+1}}\,.
+	\]
+\end{Lemma}
+
+Sia ora $X \subseteq \PP^N$, e $p \in \PP^N$
+\begin{Def}
+	Il rango $\rk_X(p)$ è definito come
+	\[
+		\rk_X(p) = \min\{h+1 \mid p \in \ang{x_1, \dots, x_{h+1}}\}\,.
+	\]
+\end{Def}
+\begin{Def}
+Il rango di bordo $\brk_X(p)$ è definito come
+\[
+\brk_X(p) = \min\{h+1 \mid p \in \sigma_{h+1}(X)\}\,.
+\]
+\end{Def}
+Ovviamente $\brk_X(p)$ è minore di $\rk_X(p)$.
+
+Se $X = v_d(\PP V) = \{\ell^{\otimes d} \mid \ell \in \PP V\}$ in $\PP(S^d V)$, allora stiamo sostanzialmente guardando al rango simmetrico.
+
+Se $X' = \PP V \times \dots \times \PP V$ dentro $\PP(V^{\otimes d})$, stiamo guardando al rango normale.
+
+Siccome $v_d(\PP V)$ coincide con $X' \cap \PP(S^d V)$, allora ogni elemento di $\PP(S^dV)$ ha due ranghi. È una congettura se sono uguali.
+
+Inoltre,  sicuramente vero che
+\[
+	\sigma_{h+1}(v_d(\PP V)) \subseteq \PP(S^d V) \cap \sigma_{h+1}(X')\,.
+\]
+È una congettura se valga l'uguaglianza.\vspace{0.5cm}
+
+\noindent\fbox{\parbox{\textwidth}{Note terminate a causa della presenza di appunti del Prof.\ Ottaviani sulla teoria dell'apolarità}}
+
 \printbibliography
 \end{document}
