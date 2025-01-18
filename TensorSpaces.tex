@@ -3,9 +3,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 
-
+\usepackage{geometry}
 \usepackage{mathtools, amssymb}
 
+\usepackage[vcentermath]{youngtab}
 \usepackage{amsthm}
 \theoremstyle{definition}
 \newtheorem{Def}{Definizione}[section]
@@ -31,6 +32,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\MM}{\mathfrak{M}}
 \newcommand{\A}{\mathbb{A}}
 \newcommand{\deff}{\coloneqq}
 \newcommand{\CC}{\mathcal{C}}
@@ -53,6 +55,7 @@
 	\addbibresource{TensorSpaces.bib}
 	\DeclareFieldFormat{url}{\url{#1}}
 
+\usepackage{tikz}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 
@@ -726,6 +729,383 @@ Inoltre,  sicuramente vero che
 È una congettura se valga l'uguaglianza.\vspace{0.5cm}
 
 \noindent\fbox{\parbox{\textwidth}{Note terminate a causa della presenza di appunti del Prof.\ Ottaviani sulla teoria dell'apolarità}}
+\section{Teoria dell'Apolarità}
+Sia $K = \C$, e sia $V$ uno spazio vettoriale di dimensione $n+1$. Inoltre, siano 
+\[
+	R = K[x_0,\dots, x_n] \simeq S^\bullet V, \quad S = K[\partial_0, \dots, \partial_n] \simeq S^\bullet V^\vee 
+\]
+L'anello $R$ ha un unico ideale massimale omogeneo: $\MM = (\partial_0, \dots, \partial_n)$. Inoltre, $S$ agisce su $R$ additivamente tramite la ovvia azione che indichiamo con $\cdot$.
 
-\printbibliography
+D'ora in poi useremo la notazione a multiindice.
+\begin{Lemma}\label{Lemma:dualbas}
+	Se $\alpha$ e $\beta$ sono multiindici tali che $\abs{\alpha} = \abs{\beta}$, allora
+	\[
+		\partial^\alpha \cdot x^\beta =
+		\begin{cases}
+			\alpha! & \alpha = \beta \\
+			0 & \alpha \neq \beta
+		\end{cases}
+	\]
+\end{Lemma}
+\begin{Cor}
+	L'accoppiamento tra $S^dV^\vee$ e $S^dV$ è una dualità, e $S^d V^\vee$ è isomorfo a $(S^dV)^\vee$.
+\end{Cor}
+\begin{Lemma}\label{Lemma:gelld}
+	Se $g \in S_d$, e $\ell = \sum c_i x_i$, allora
+	\[
+		g\cdot\ell^d = d!\,g(c_0, \dots, c_n)
+	\]
+\end{Lemma}
+\begin{proof}
+	Usando la notazione a multiindice, possiamo notare semplicemente che
+	\[
+		g\cdot \ell^d = g\cdot\left[\sum_{\abs{\alpha} = d}c^\alpha x^\alpha\binom{d}{\alpha}\right] = \sum_{\abs{\alpha} = d}g_\alpha c^\alpha\alpha!\binom{d}{\alpha}
+	\]
+	che coincide esattamente con $d!\,g(c_0, \dots c_n)$.
+\end{proof}
+
+\begin{Def}
+	Dato $f \in S^d V = R_d$, \emph{l'ideale apolare} è definito come
+	\[
+		f^\bot = \{g \in S \mid g\cdot f = 0\}\,.
+	\]
+\end{Def}
+\begin{Def}
+	Una $R$-algebra $S$, con $R$ un anello, è detta Artiniana se $R$ è Artiniano e se $S$ è un $R$-modulo finitamente generato. In particolare, se $R$ è un campo stiamo chiedendo che $\dim_R S$ sia finito.
+\end{Def}
+\begin{Prop}
+	\begin{enumerate}
+		\item $f^\bot$ è un ideale omogeneo (i.e.\ è un sottomodulo graduato).
+		\item il \emph{zoccolo} $(f^\bot)_d$ ha $K$-codimensione 1.
+		\item Se $k > d$, allora $(f^\bot)_k = S^k V$.
+		\item L'algebra graduata
+		\[
+			A_f \deff SV^\vee/(f^\bot) = \bigoplus_{e = 0}^\infty S^eV^\vee/(f^\bot)_e\,.
+		\]
+		è un'algebra Artiniana.
+	\end{enumerate}
+\end{Prop}
+\begin{Prop}
+	Sia $f \in S^d V$. Allora per ogni $e < d$ vale che
+	\[
+		(f^\bot)_e = [(f^\bot)_e \colon \MM^{d-2}]_e = \{g \in S_e \mid \forall h \in \MM^{d-e}\ (gh)\cdot f = 0\}\,.
+	\]
+\end{Prop}
+\begin{proof}
+	L'inclusione $\boxed{\subseteq}$ è immediata.
+	
+	Per quanto riguarda l'inclusione \boxed{\supseteq}\,, sia $g \in [(f^\bot)_d \colon \MM^{d-e}]$ per cui $(g\partial^\alpha) \cdot f = 0$ per ogni $\abs{\alpha} = d-e$. Siccome $S$ è un anello commutativo, allora
+	\[
+	(g\partial^\alpha)\cdot f = (\partial^\alpha\,g)\cdot f =  \partial^\alpha\cdot(g\cdot f)\,,
+	\]
+	e per il Lemma~\ref{Lemma:dualbas}, sappiamo che tutti i coefficienti di $g \cdot f \in S_{d-e}$ sono zero. Conseguentemente, $g \cdot f = 0$, i.e.\ $g$ appartiene a $(f^\bot)_e$.
+\end{proof}
+\begin{Prop}
+	Sia $f \in S^d V$ e sia $e \in \{0,\dots, d\}$. La moltiplicazione 
+	\[
+		(A_f)_e \times (A_f)_{d-e} \to (A_f)_d \simeq \C
+	\]
+	è una dualità perfetta.
+\end{Prop}
+\begin{proof}
+	Dimostriamo che la componente di sinistra è non-degenere. Per simmetria lo stesso risultato vale anche per l'altra componente.
+	
+	Sia $[t] \in (A_f)_e$, tale che $[tu] = 0$ in $(A_f)_f$ per ogni $u \in (A_f)_{d-e}$. In particolare, $tu$ appartiene a $(f^\bot)_d$ per ogni $u \in \MM^{d-e} \subseteq S_{d-e}$. Ergo, $t$ appartiene a $[(f^\bot)_d \colon \MM^{d-e}]_e$. La precedente proposizione implica quindi che $t$ appartiene a $(f^\bot)_e$, i.e.\ $[f] = 0$ in $(A_f)_e$.
+\end{proof}
+
+La precedente proposizione ci dice che l'algebra è un'algebra di Gorestein. 
+
+Siano $Z = \{[\ell_1], \dots, [\ell_r]\} \subseteq \PP V$, con $\deg \ell_i = 1$.
+\begin{Lemma}[Apolarità]
+	$f$ coincide con $\sum \ell_i^d$ se e solo se $I_Z$ è contenuto in $f^\bot$.
+\end{Lemma}
+
+Nel caso in cui $\dim_\C V = 2$, allora il lemma precedente diventa come segue.
+\begin{Lemma}[Apolarità per forme bilineari]
+	Sia $f \in \C[x,y]$, e siano $(\alpha_i \colon \beta_i)$ punti distinti in $\PP^1$, allora
+	\[
+		\left[\prod_i \beta_i \partial_x - \alpha_i\partial_y\right] \cdot f = 0 \ \Leftrightarrow\ f = \sum_i c_i(\alpha_i x + \beta_i y)^d
+	\]
+\end{Lemma}
+\begin{proof}
+	Posto
+	\[
+		Z = \{[\alpha_1 x + \beta_1 y], \dots, [\alpha_k x + \beta_k y]\}\,,
+	\]
+	allora il risultato segue dal Lemma di Apolarità una volta provato che
+	\[
+		I_Z = ((\beta_1\partial_x - \alpha_1\partial_y)\cdot\dots\cdot(\beta_k\partial_x - \alpha_k\partial_y))\,.
+	\]
+	
+	Sicuramente l'ideale proposto, che denotiamo con $J$, è contenuto in $I_Z$.
+	
+	D'altra parte, sia $g \in I_Z$ omogeneo. Allora $g$ ha $(\alpha_i, \beta_i)$ come radici: per il Lemma~\ref{Lemma:gelld} 
+	\begin{equation}\label{eq:ruffini}
+		d!g(\alpha_i,\beta_i) = g\cdot (\alpha_i x + \beta_iy) = 0\,.
+	\end{equation}
+	per ogni $i = 1,\dots, k$. Ma sappiamo che in due variabili vale un teorema di circa-Ruffini. Detto altrimenti, da \eqref{eq:ruffini} sappiamo che il polinomio
+	\[
+		\prod_{i = 1}^k \beta_1\partial_x - \alpha_1 \partial_y
+	\]
+	divide $g$.
+\end{proof}
+
+Una versione più generale, che introduce delle molteplicità, è data dall'enunciato seguente.
+\begin{Prop}
+	Sia $f \in \C[x,y]_d$, e siano $(\alpha_i \colon \beta_i)$, $i = 1,\dots, k$, punti di $\PP^1$. Allora
+	\[
+	\begin{split}
+		&\left[\prod_i \beta_i \partial_x - \alpha_i\partial_y\right]\cdot f = 0 \\
+		&\Leftrightarrow\ \exists c_i(c,y) \in \C[x,y]_{m_i -1} \text{ t.c. }f = \sum c_i(x,y) (\alpha_i x + \beta_i y)^{d-m_i +1}
+	\end{split}
+	\]
+\end{Prop}
+\begin{proof}
+	La dimostrazione, in teoria data in classe, è incomprensibile.
+\end{proof}
+
+\begin{Def}
+		Se $S$ è un anello $\Z_{\ge 0}$-graduato, allora un ideale $I$ \emph{riempe l'anello in grado $k$} se $I$ contiene $S_k$.
+\end{Def}
+\begin{Lemma}
+	Siano $\phi_1$, $\phi_2$ in $\C[x,y] = S$ due polinomi senza fattori in comune.
+	\begin{enumerate}
+		\item L'ideale $I = (\phi_1, \phi_2)$ riempe l'anello $R$ in gradi maggiori o uguali di $\deg \phi_1 + \deg \phi_2 - 1$. Inoltre, $I$ ha codimensione 1 in grado $d \deff \deg \phi_1 + \deg \phi_2 -1 $.
+		\item  $I_e$ coincide con $[I_d \colon \MM^{d-e}]_e$.
+	\end{enumerate}
+\end{Lemma}
+\begin{proof}
+	Sia $d_i \deff \deg \phi_i$, e consideriamo la sequenza corta
+	\[
+	\begin{split}
+		0 \to S \to S &\oplus S \to I \to 0\\
+		\beta \mapsto (-\beta\phi_2, \beta\phi_1)\\
+		&(a,b) \mapsto a\phi_1 + b\phi_2
+	\end{split}
+	\]
+	Siccome $\phi_1$ e $\phi_2$ non hanno fattori in comune, la sequenza precedente è esatta.
+	
+	Conseguentemente, preso un certo polinomio $g \in S$ di grado $t \ge d_1 + d_2 -1$, allora 
+\end{proof}
+
+\begin{Teo}
+	L'ideale $f^\bot$ ha sempre due generatori.	
+\end{Teo}
+
+\section{Grassmaniane}
+Fissiamo un $\C$-spazio vettoriale $V$ di dimensione $n+1$.
+\begin{Def}
+	La Grassmanniana $\Gr(\PP^k, \PP^n)$, i.e.\ la varietà dei sottospazi di $V$ di dimensione $k+1$, viene identificata con i prodotti wedge indecomponibili in $\Lambda^{k+1} V$.
+\end{Def}
+Ricordiamo il risultato noto.
+\begin{Prop}
+	La varietà $\Gr(\PP^k, \PP^n)$ ha la struttura di varietà liscia, ed ha dimensione $(k+1)(n-k)$.
+\end{Prop}
+
+Fissiamo una base $e_0, \dots, e_n$ per $V$, in modo da avere una identificazione canonica $V \simeq \C^{n+1}$.
+
+Consideriamo un sottospazio $L = \ang{v_0, \dots, v_k}$ di dimensione $k+1$, ed organizziamo i vettori in righe incolonnate, via una matrice $M_L$ in $M_{(k+1)\times (n+1)}(\C)$ di rango massimo. A questo punto, possiamo osservare il seguente fatto: \emph{due embedding $\C^{k+1} \xrightarrow{i,\,j} V$ danno la stessa immagine se e solo se esiste una trasformazione $g \in GL_{k+1}\C$ per cui $i = jg$}.
+
+Conseguentemente, moltiplicare la matrice $M_L$ a sinistra per un elemento di $GL_{k+1}(\C)$ non cambia lo spazio generato dalle righe (trasposte). Ma questa operazione coincide con una riduzione di Gauss per righe, che porta $M_L$ in 
+\[
+\begin{bmatrix}
+	1 & * & * & 0 & \cdots \\
+	0 & 0 & 0 & 1 & \cdots \\
+	0 & 0 & 0 & 0 & \cdots\\
+	\vdots & \vdots & \vdots & \vdots & \ddots 
+\end{bmatrix}
+\]
+
+In base alle possibili configurazione di questa forma, possiamo decomporre la Grassmaniana in celle affini, dette \emph{celle di Schubert}.ù
+
+Un modo per organizzare queste celle, in modo da avere una descrizione combinatorica, è tramite le \emph{tabelle di Young}.
+\begin{Def}
+	La tabella di Young di parametri interi $(\lambda_1 \ge \dots \ge \lambda_{k+1})$ è data dal diagramma seguente:
+	\[
+		\lambda = \underset{\vdots\ \ \ \ \ \ \ \ \ \ }{\yng(6,4,3)}
+	\]
+	dove la riga $i$ ha lunghezza $\lambda_i$.
+\end{Def}
+Per futura utilità definiamo l'insieme delle tabelle di Young
+\[
+	Y_{k,n} \deff \{\lambda \mid k \text{ righe ed al più } n - k \text{ colonne}\}\,.
+\]
+
+Le tabelle di Young possiedono una naturale struttura ad albero, governata dalla relazione di inclusione delle une dentro le altre. Per esempio l'insieme $Y_{1,3}$ si ordine come segue:\vspace{0.3cm}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[x=0.75pt, y= 0.75pt]
+	\node at (0,40) {$\yng(2)$};
+	\node at (0,-40) {$\yng(1,1)$};
+	\node at (-100,0) {$\yng(1)$};
+	\node at (100,0) {$\yng(2,1)$};
+	\node at (-190,0) [font = \Large]{$\varnothing$};
+	\node at (200,0) {$\yng(2,2)$};
+	\draw (-170,0) -- (-120,0);
+	\draw (130,0) -- (170,0);
+	\draw (-80,0) -- (-30,30);
+	\draw (-80,0) -- (-30,-30);
+	\draw (30,30) -- (70,0);
+	\draw (30,-30) -- (70,0);
+\end{tikzpicture}
+\caption{Tabelle di Young con al più 2 righe}
+\label{fig:young2}
+\end{figure}
+\begin{Def}
+Fissiamo ora una base $\ang{e_0, \dots, e_n}$ su $V$, e fissiamo la filtrazione
+\[
+	F_0 \deff \{0\},\ F_i \deff \ang{e_{n-i+1}, \dots, e_n}\,.
+\] 
+Data una tabella di Young $\lambda \in Y_{k,n}$, la cella $X_\lambda$ è definita come
+\[
+	X_\lambda \deff \{L \in \Gr_{k+1}(V) \mid \dim(L \cap F_{n-k+i-\lambda_i}) \ge i\ \forall 1 \le i \le k+1\}\,.
+\]
+\end{Def}
+Essa è una \emph{cella affine} di codimensione 
+\[
+	\abs{\lambda} \deff \#\{\text{scatole in }\lambda\}\,.
+\]
+In particolare, la cella $C_{(0,\dots, 0)}$ ha dimensione massima. Se guardiamo a alla varietà di Grassmann come varietà algebrica con topologia di Zarinsky, $C_{(0,\dots, 0)}$ è ancora aperto. La varietà di Grassmann è quindi una varietà algebrica particolare: possiede un sottoinsieme aperto, e quindi Zarinskyi-denso, che è anche una sottovarietà algebrica affine.
+
+L'ordinamento delle tabelle di Young fornisce un ordinamento nelle celle della forma
+\[
+	\lambda \subseteq \mu \ \Rightarrow\ X_\lambda \supseteq X_\mu
+\]
+Inoltre, questo ordinamento è strettamente legato alla forma di Gauss su righe ridotta: infatti, se andiamo a considerare le differenze
+\[
+	X_\lambda^0 \deff X_\lambda \setminus \bigcup_{\lambda \subseteq \mu} X_\mu,
+\]
+allora i differenti $X_\lambda^0$ raggruppano i diversi modi in cui si può presentare una forma di Gauss ridotta su righe di una matrice $(k+1)\times(n+1)$ di rango massimo. 
+
+Per dare maggiore chiarezza al discorso --- per quanto possibile --- consideriamo il caso di $\Gr(\PP^1, \PP^3)$. Essa è la varietà dei 2-sottospazi in $\C^4$, ed ha dimensione complessa 4. Le tabelle di Young $Y_{1,3}$ sono mostrate nella Figura~\ref{fig:young2}. Le relative celle di Schubert $\{X_\lambda\}_\lambda$ sono quindi ordinate come segue:
+\begin{center}
+\begin{tikzpicture}[x=0.75pt, y=0.75pt]
+	\node at (0,40) {$X_{(2,0)}$};
+	\node at (0,-40) {$X_{(1,1)}$};
+	\node at (-100,0) {$X_{(1,0)}$};
+	\node at (100,0) {$X_{(2,1)}$};
+	\node at (-190,0) {$X_{(0,0)}$};
+	\node at (200,0) {$X_{(2,2)}$};
+	\draw (-170,0) -- (-120,0);
+	\draw (130,0) -- (170,0);
+	\draw (-80,0) -- (-30,30);
+	\draw (-80,0) -- (-30,-30);
+	\draw (30,30) -- (70,0);
+	\draw (30,-30) -- (70,0);
+\end{tikzpicture}
+\end{center}
+
+In particolare, otteniamo un analogo diagramma se sostituiamo $X_\lambda$ con $X_\lambda^0$. Quest'ultimo corrisponde alle possibili forme di Gauss ridotte per righe tramite il diagramma seguente:
+\begin{center}
+\begin{tikzpicture}[x=0.75pt, y=0.75pt]
+	\node at (0,40) {$
+	\begin{bmatrix}
+	1 & * & * & 0 \\
+	0 & 0 & 0 & 1 	
+	\end{bmatrix}
+	$};
+	\node at (0,-40) {$
+	\begin{bmatrix}
+	0 & 1 & 0 & * \\
+	0 & 0 & 1 & * 	
+	\end{bmatrix}
+	$};
+	\node at (-100,0) {$
+	\begin{bmatrix}
+	1 & * & 0 & * \\
+	0 & 0 & 1 & * 	
+	\end{bmatrix}
+	$};
+	\node at (100,0) {$
+	\begin{bmatrix}
+	0 & 1 & * & 0 \\
+	0 & 0 & 0 & 1 	
+	\end{bmatrix}
+	$};
+	\node at (-210,0) {$
+	\begin{bmatrix}
+	1 & 0 & * & * \\
+	0 & 1 & * & * 	
+	\end{bmatrix}
+	$};
+	\node at (210,0) {$
+	\begin{bmatrix}
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1 	
+	\end{bmatrix}
+	$};
+	\draw (-165,0) -- (-145,0);
+	\draw (145,0) -- (165,0);
+	\draw (-80,30) -- (-45,40);
+	\draw (-80,-30) -- (-45,-40);
+	\draw (80,30) -- (45,40);
+	\draw (80,-30) -- (45,-40);
+\end{tikzpicture}
+\end{center}
+
+Possiamo effettivamente visualizzare il collegamento tra forma di Gauss ridotta per righe e tabelle di Young. Supponiamo di voler considerare le celle di Schubert nello spazio $\Gr(\PP^k, \PP^n)$. Le relative tabelle di Young appartengono a $Y_{k,n}$, e sono quindi tabelle contenute in una griglia $A_{k,n}$ di forma $(k+1)\times (n-k)$. Una specifica forma di Gauss ridotta avrà degli $*$, che procediamo ad allineare sul lato destro di $A_{k,n}$. Il complementare, una volta riflessa sull'asse orizzontale, sarò la relativa la tabella di Young. 
+
+Per esempio, consideriamo la forma di Gauss in $\Gr(\PP^2, \PP^6)$
+\[
+	\begin{bmatrix}
+		0 & 1 & * & 0 & * & * & 0 \\
+		0 & 0 & 0 & 1 & * & * & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 1
+	\end{bmatrix}	
+\]
+La matrice $A_{2,6}$ viene riempita come segue:
+\begin{equation}\label{eq:Gauss}
+	\young(\hfil ***,\hfil\hfil **,\hfil\hfil\hfil\hfil)
+\end{equation}
+e quindi la tabella di Young associata a \eqref{eq:Gauss} è $\tiny \yng(4,2,1)$.\vspace{1ex}
+
+Parliamo ora della \emph{coomologia della Grassmanniana}. La sua descrizione è puramente combinatorica.
+\begin{Teo}
+	La coomologia di $\Gr(\PP^k_\C, \PP^n_\C)$ è zero in dimensione dispari, ed è
+	\[
+		\dim_\R\,H^{2i}(\Gr(\PP^k_\C, \PP^n_\C); \R) = \abs{\{\lambda \in Y_{k,n}\mid \lambda \text{ ha $2i$ scatole}\}}
+	\]
+	in dimensione pari.
+\end{Teo}
+\begin{proof}[Sketch della dimostrazione]
+	Si può dimostrare che ognuna delle celle di Schubert $X^0_\lambda$ è topologicamente omeomorfa all'interno di un disco complesso $D_\C^i$, con $\abs{\lambda} = i$. In particolare, $X^0_\lambda$ è omeomorfa al disco reale $D_\R^{2i}$. Inoltre, se definiamo
+	\[
+		X^{(2i)} \deff \bigcup_{\abs{\lambda} = 2i} \overline{X^0_\lambda},
+	\]
+	allora abbiamo una decomposizione $CW$
+	\[	
+		X^{(0)} \subseteq \dots \subseteq X^{(2d)},\ d = \dim_\C \Gr(\PP^k, \PP^n)
+	\]
+	con \emph{celle solo $\R$-dimensione pari}. Ma a questo punto sappiamo il complesso cellulare omologico su $\Z$ è della forma
+	\[
+		0 \to \Z^{a_0} \overset{\partial}{\to} 0 \overset{\partial}{\to} \Z^{a_2} \overset{\partial}{\to} 0 \overset{\partial}{\to} \dots \overset{\partial}{\to} 0 \overset{\partial}{\to} \Z^{a_{2d}} \to 0 
+	\]
+	con 
+	\[
+		a_{2i} = \abs{\{\lambda \in Y_{k,n} \mid \abs{\lambda} = 2i\}}\,.
+	\]
+	Conseguentemente 
+	\[
+		H_{2i}(\Gr(\PP^k, \PP^n);\Z) = \Z^{a_{2i}}
+	\]
+	ed è nulla altrimenti. Per coefficienti univesali concludiamo:
+	\[
+		H^{2i}(\Gr(\PP^k_\C, \PP^n_\C); \R) = H_{2i}(\Gr(\PP^k, \PP^n);\Z) \otimes \R = \R^{a_{2i}}\,. \qedhere
+	\]
+\end{proof}
+Per il teorema dei coefficienti universali, le dimensioni di 
+\[
+	\dim_\C\,H^{2i}(\Gr(\PP^k_\C, \PP^n_\C); \C)
+\]
+con quelle precedenti.
+
+Per esempio
+\[
+	H^i(\Gr(\PP^1, \PP^3);\C) = 
+	\begin{cases}
+		\C & i = 0,2,6,8\\
+		\C^2 & i = 4\\
+		0 &\text{altrimenti}
+	\end{cases}
+\]
 \end{document}
