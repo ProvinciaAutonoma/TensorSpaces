@@ -21,6 +21,19 @@
 \setlist[enumerate, 1]{label = (\roman*)}
 
 
+
+\usepackage{booktabs}
+
+\usepackage[autostyle, italian=guillemets]{csquotes}
+\usepackage[backend=biber, style=numeric, hyperref, giveninits=true]{biblatex}
+	\addbibresource{TensorSpaces.bib}
+	\DeclareFieldFormat{url}{\url{#1}}
+
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+
+
 \DeclarePairedDelimiter{\ang}{\langle}{\rangle}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \renewcommand{\epsilon}{\varepsilon}
@@ -48,21 +61,12 @@
 \DeclareMathOperator{\minrkop}{minrk}
 \newcommand{\minrk}[4]{\minrkop(#1 \!\!\!\mod #2\ #3\ #4)}
 
-\usepackage{booktabs}
-
-\usepackage[autostyle, italian=guillemets]{csquotes}
-\usepackage[backend=biber, style=numeric, hyperref, giveninits=true]{biblatex}
-	\addbibresource{TensorSpaces.bib}
-	\DeclareFieldFormat{url}{\url{#1}}
-
-\usepackage{tikz}
-\usepackage{hyperref}
-\hypersetup{hidelinks}
 
 \title{Introduction to Tensor Spaces\\ Appunti del Corso}
 \author{Mirko Torresani}
 \begin{document}
 	\maketitle
+	\tableofcontents	
 \section{Fatti Introduttivi}
 Per noi gli spazi vettoriali saranno di dimensione finita, con campo base $\C$. 
 \begin{Def}
@@ -423,7 +427,7 @@ Dati due spazi $A$, $B$, lo spazio $G \deff GL(A) \times (B)$ è incluso in $GL(
 	\]
 \end{Prop} 
 
-Gli elementi di $(\C^2)^{\otimes 3}$ hanno le orbite secondo $(GL_2(\C))^3$ che seguono la seguente tabella:
+Gli elementi di $(\C^2)^{\otimes 3}$ si decompongono in $(GL_2(\C))^3$-orbite secondo la seguente tabella:
 \[
 \begin{array}{cccccc}
 	\toprule
@@ -722,13 +726,13 @@ Se $X' = \PP V \times \dots \times \PP V$ dentro $\PP(V^{\otimes d})$, stiamo gu
 
 Siccome $v_d(\PP V)$ coincide con $X' \cap \PP(S^d V)$, allora ogni elemento di $\PP(S^dV)$ ha due ranghi. È una congettura se sono uguali.
 
-Inoltre,  sicuramente vero che
+Inoltre, è sicuramente vero che
 \[
 	\sigma_{h+1}(v_d(\PP V)) \subseteq \PP(S^d V) \cap \sigma_{h+1}(X')\,.
 \]
 È una congettura se valga l'uguaglianza.\vspace{0.5cm}
 
-\noindent\fbox{\parbox{\textwidth}{Note terminate a causa della presenza di appunti del Prof.\ Ottaviani sulla teoria dell'apolarità}}
+\noindent\fbox{\parbox{\textwidth}{Benché il Prof.\ Ottaviani abbia messo delle note, queste ultime sono così incomprensibili che ho deciso conmunque di continuare le note.}}
 \section{Teoria dell'Apolarità}
 Sia $K = \C$, e sia $V$ uno spazio vettoriale di dimensione $n+1$. Inoltre, siano 
 \[
@@ -891,7 +895,12 @@ Una versione più generale, che introduce delle molteplicità, è data dall'enun
 \begin{Teo}
 	L'ideale $f^\bot$ ha sempre due generatori.	
 \end{Teo}
-
+\begin{Teo}[Lemma di Apolarità -- Versione Schematica]
+	Sia $Z \subseteq \PP V$ una un sottoschema chiuso zero-dimensionale, con ideale vanescente $I(Z) \subseteq S(V^\vee)$, e sia $v_d \colon \PP v \to \PP(S^dV)$ l'embedding di Veronese. Allora, per $f \in S^d V \setminus \{0\}$,
+	\[
+		I_Z \subseteq f^\bot\ \Rightarrow\ [f] \in \ang{v_d(Z)}
+	\]
+\end{Teo}
 \section{Grassmaniane}
 Fissiamo un $\C$-spazio vettoriale $V$ di dimensione $n+1$.
 \begin{Def}
@@ -1057,7 +1066,7 @@ La matrice $A_{2,6}$ viene riempita come segue:
 \begin{equation}\label{eq:Gauss}
 	\young(\hfil ***,\hfil\hfil **,\hfil\hfil\hfil\hfil)
 \end{equation}
-e quindi la tabella di Young associata a \eqref{eq:Gauss} è $\tiny \yng(4,2,1)$.\vspace{1ex}
+e quindi la tabella di Young associata a \eqref{eq:Gauss} è {\tiny$ \yng(4,2,1)$.\vspace{1ex}}
 
 Parliamo ora della \emph{coomologia della Grassmanniana}. La sua descrizione è puramente combinatorica.
 \begin{Teo}
@@ -1108,4 +1117,171 @@ Per esempio
 		0 &\text{altrimenti}
 	\end{cases}
 \]
+\section{Rappresentazioni}
+
+\begin{Def}
+	Dato un gruppo $G$, l'anello $ \C G$ è dato dall'insieme delle somme formali 
+	\[
+		\{\sum \lambda_g g \mid \lambda_g \in \C\}\,.
+	\]
+\end{Def}
+\begin{Def}
+	Un \emph{tableu} con $d$ caselle è un diagramma di Young, con $d$ caselle, quest'ultime riempite con i numeri $1, \dots, d$. Un tableu si dice \emph{standard} se è strettamente crescente nelle righe e nelle colonne.
+\end{Def}
+\begin{Def}
+	Dato un tableu $\lambda$, l'insieme delle simmetrie su riga $R_\lambda \subseteq \Sigma_d$ è l'insieme delle permutazioni su $d$ elementi che preservano i valori sulle righe. Analogamente per $C_\lambda$, ma sulle colonne.
+\end{Def}
+\begin{Def}
+	Il simmetrizzatore di Young rispetto ad un tableu $\lambda$ è
+	\[
+		c_\lambda \deff \sum_{\substack{\sigma \in R_\lambda \\ \tau \in C_\lambda}}\epsilon(\tau)\sigma\tau\,,
+	\]
+	dove $\epsilon$ è la funzioen segno.
+\end{Def}
+
+Per esempio. se $\lambda$ e $\mu$ sono i tableu seguenti
+\[
+\begin{split}
+	\young(12)\dots\young(d) \qquad \young(1,2)&\\[-1ex]
+	\vdots\ & \\[-1ex]
+	\young(d)&
+\end{split}
+\]
+allora 
+\[
+	c_\lambda = \sum_{\sigma \in \Sigma_d} \sigma \qquad c_\mu = \sum_{\tau \in \Sigma_d}\epsilon(\tau)\tau
+\]
+
+I tableu permettono di classificare le rappresentazioni di $\Sigma_d$, cioè gli $\C \Sigma_d$-moduli irriducibili. Alcune sono immediate.
+\begin{enumerate}
+	\item $\Sigma_d$ agisce banalmente su $\C$.
+	\item $\Sigma_d$ agisce su $\C$ attraverso l'azione alternante: $\sigma \cdot v = \epsilon(\sigma)v$.
+	\item $\Sigma_d$ agisce su $\C^d$ via $\sigma \cdot e_i = e_{\sigma(i)}$. Questa azione si decompone, come $\C \Sigma_d$-modulo, come
+	\[
+		\C^d = \{(x_1, \dots, x_d) \mid \textstyle \sum_i x_i = 0\} \oplus \ang{e_1 + \dots + e_n}.
+	\]
+	Sul secondo addendo $\Sigma_d$ agisce banalmente, e quindi ritroviamo la rappresentazione definita al primo punto. Il primo addendo risulta invece irriducibile, e costituisce una rappresentazione su uno spazio isomorfo a $\C^{d-1}$.
+\end{enumerate}
+
+Ricordiamo dei fatti di teoria delle rappresentazioni.
+\begin{enumerate}
+	\item Come $\C \Sigma_d$-moduli abbiamo un isomorfismo $\C \Sigma_d \simeq \lambda_1 W_1 \oplus\dots\oplus \lambda_r W_r$, dove $\{W_i\}_{i=1}^r$ danno tutte le classi di $\C \Sigma_d$-moduli irriducibili.
+	\item Il numero $r$ di rappresentazioni irriducibili distinte coincide col numero delle classi di coniugio di $\Sigma_d$.
+	\item Come $\C$-algebra $\C \Sigma_d$ è isomorfa ad un prodotto di spazi di matrici 
+	\[
+		\C \Sigma_d \simeq_\C M_{\lambda_1}\C \times \dots \times M_{\lambda_r}\C
+	\]
+	e quindi $\abs{\Sigma_d} = \lambda_1^2+\dots+\lambda_r^2$. 
+	\item Come $\C$-spazi vettoriale ogni $S_i$ ha dimensione precisamente $\lambda_i$.
+\end{enumerate}
+
+Abbiamo già trovato 3 rappresentazioni irriducibili di dimensione complessa 1,1 e 2. Siccome $6 = 1^2 + 1^2 + 2^2$ sappiamo che come $\C \Sigma_3$-modulo
+\[
+	\C \Sigma_3 \simeq \C_{\text{banale}} \oplus \C_{\text{sgn}}\oplus (\C^2)^{\oplus 2}
+\]
+
+Osserviamo il seguente fatto: il numero di rappresentazioni irriducibili si $\Sigma_d$ coincide con il numero delle le classi di coniugio in $\Sigma_d$, che a sua volta coincide col numero di partizioni di $d$, che infine coincide col numero di tabelle di Young con $d$ caselle. 
+
+\begin{Def}
+	Per ogni tabella di Young $\lambda$, il \emph{tableu canonico} è quello con le entrate scritte in successione, per esempio come segue:
+	\[
+		\young(123,45,67,8)
+	\]
+\end{Def}
+
+Possiamo quindi pensare alle tabelle di Young come a dei particolari tableu standard. 
+\begin{Teo}
+	\begin{enumerate}
+		\item Dati due tableu canonici $\lambda \neq \mu$, allora
+		\[
+			c_\lambda\,c_\mu = 0 \qquad c_\lambda^2 = n_\lambda\,c_\lambda
+		\]
+		\item Definito $V_\lambda \subseteq \C \Sigma_d$ come
+		\[
+			V_\lambda \deff \C \Sigma_d \cdot c_\lambda 
+		\]
+		essa è una rappresentazione irriducibile di $\Sigma_d$.
+		\item I differenti $\{V_\lambda\}_{\abs{\lambda} = d}$ danno una decomposizione di $\C \Sigma_d$-moduli
+		\[
+			\C \Sigma_d = \bigoplus_{\substack{\abs{\lambda} = d\\ \text{canonico}}} V_\lambda\,.
+		\]
+		Ergo questi $V_\lambda$ danno la famiglia delle rappresentazioni irriducibili.
+		\item Lo spazio $V_\lambda$ ha dimensione pari al numero di tableu standard con $d$ caselle.
+	\end{enumerate}
+\end{Teo}
+
+\begin{Def}
+	Un polinomio $f \in \C[x_1, \dots, x_n]$ si dice simmetrico se è invariante per l'azione di $S_n$.
+\end{Def}
+Ricordiamo che un polinomio simmetrico ha la forma 
+\[
+	g(\sigma_1, \dots, \sigma_n)
+\]
+con $g \in \C[x_1, \dots, x_n]$ e $\sigma_i$ l'$i$-esimo polinomio simmetrico elementare.
+\begin{Teo}
+	Sia 
+	\[
+		f \colon GL_{n+1} \to \C
+	\]
+	una mappa polinomiale nelle entrate della matrice, che è invariante per coniugio. Allora $f$ è un polinomio simmetrico negli autovalori della matrice, e quindi per il remark precedente
+	\[
+		f = g(\sigma_1, \dots, \sigma_n)
+	\]
+	con $\sigma_i \in \C[\lambda_1, \dots, \lambda_n]$.
+\end{Teo}
+
+Consideriamo ora uno spazio vettoriale $V$ di dimensione $n+1$, e sia $\lambda$ un tableu con $d$ caselle. Allora lo spazio tensoriale $V^{\otimes d}$ è naturalmente un $\C \Sigma_d$-modulo, e l'azione è data dalle permutazione dei fattori nel prodotto tensore. 
+
+\begin{Def}
+Per ogni tableu canonico $\lambda$, lo spazio $S^\lambda V$ è definito come
+\[
+	S^\lambda V \deff c_\lambda \cdot V^{\otimes d} \subseteq V^{\otimes d}
+\]
+\end{Def}
+Per esempio, 
+\[
+	S^{(d)}V = S^d V\qquad S^{(1,\dots, d)}V = \Lambda^d V
+\]
+\begin{Teo}
+	\begin{enumerate}
+		\item La rappresentazione di $GL(V)$ su $S^\lambda V$ è irriducibile 
+		\item Tutte le rappresentazioni irriducibili di $GL(V)$ sono isomorfe a $S^\lambda V$ per  qualche tableu canonico $\lambda$.
+		\item La dimensione di $S^\lambda V$ è dato dal numero di riempimenti di $\lambda$, visto come semplice tabella di Young, tramite i numeri $1, \dots, \dim V$, in modo che l'ordinamento sia strettamente crescente in ogni colonna e debolmente crescente in ogni riga (i.e.\ \emph{semistandard}).
+	\end{enumerate}
+\end{Teo}
+
+Osserviamo che $S^\lambda V$ non è nullo se e solo se il numero di righe di $\lambda$ è minore della dimensione di $V$. In particolare, $\lambda$ può avere un numero arbitrario di colonne.
+
+Un esempio un po' meno ovvio è dato da
+\[
+	S^{(\lambda_1, \lambda_2)}\C^2 = S^{\lambda_1-\lambda_2}\C^2 \oplus (\sgn)^{\oplus 2}
+\]
+\begin{Def}
+	Definiamo il carattere $s_\lambda$ come
+	\[
+		s_\lambda \deff \chi_{S^\lambda V}
+	\]
+\end{Def}
+
+Queste insieme di tablou danno un'interessante struttura moltiplicativa non indifferente. In particolare, possiamo identificare dei coefficienti per cui 
+\[
+	S^\lambda \otimes S^\mu V = \bigoplus_{\nu}(S^\nu V)^{\oplus c_{\lambda \mu}^\nu}
+\] 
+o equivalentemente
+\[
+	s_\lambda\, s_\mu = \sum_\nu c_{\lambda\mu}^\nu\,s_\nu
+\]
+
+Possiamo dare un ulteriore descrizione di questi coefficienti, in termini di \emph{celle di Schubert}. 
+
+L'insieme $\{X_\lambda\}_{\lambda}$ delle celle di Schubert contenute in una griglia $(k+1)\times (n-k)$ fornisce una base omologica di $H^*(\Gr(\PP^k, \PP^n);\Z)$. Possiamo quindi calcolare il prodotto $\smile$ in coomologia, per cui vale il seguente risultato.
+\begin{Teo}
+	\[
+		X_\lambda \smile X_\mu = \sum_\nu c_{\lambda\mu}^\nu\,X_\nu
+	\]
+\end{Teo}
+
+I coefficienti $c_{\lambda \mu}^\nu$ sono detti i \emph{coefficienti di Littlewood–-Richardson}. Il coefficiente $c_{\lambda\mu}^\nu$ coincide col \emph{numero di  skew-tableu semistandard di forma $\nu/\lambda$ e peso $\mu$.}
+
+\printbibliography[heading=bibintoc]
 \end{document}

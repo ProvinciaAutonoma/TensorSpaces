@@ -1,0 +1,10 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Fatti Introduttivi}{1}{section.1}%
+\contentsline {section}{\numberline {2}Algebre Tensoriali}{5}{section.2}%
+\contentsline {section}{\numberline {3}Decomposizione di Tensori}{8}{section.3}%
+\contentsline {section}{\numberline {4}Varietà Algebriche Tensoriali}{9}{section.4}%
+\contentsline {section}{\numberline {5}Teoria dell'Apolarità}{14}{section.5}%
+\contentsline {section}{\numberline {6}Grassmaniane}{17}{section.6}%
+\contentsline {section}{\numberline {7}Rappresentazioni}{21}{section.7}%
+\contentsline {section}{Riferimenti bibliografici}{24}{section*.3}%
