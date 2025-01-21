@@ -938,7 +938,7 @@ Un modo per organizzare queste celle, in modo da avere una descrizione combinato
 \end{Def}
 Per futura utilità definiamo l'insieme delle tabelle di Young
 \[
-	Y_{k,n} \deff \{\lambda \mid k \text{ righe ed al più } n - k \text{ colonne}\}\,.
+	Y_{k,n} \deff \{\lambda \mid \text{ al più $k+1$ righe e $n - k$ colonne}\}\,.
 \]
 
 Le tabelle di Young possiedono una naturale struttura ad albero, governata dalla relazione di inclusione delle une dentro le altre. Per esempio l'insieme $Y_{1,3}$ si ordine come segue:\vspace{0.3cm}
@@ -958,7 +958,7 @@ Le tabelle di Young possiedono una naturale struttura ad albero, governata dalla
 	\draw (30,30) -- (70,0);
 	\draw (30,-30) -- (70,0);
 \end{tikzpicture}
-\caption{Tabelle di Young con al più 2 righe}
+\caption{Tabelle di Young in $Y_{1,3}$}
 \label{fig:young2}
 \end{figure}
 \begin{Def}
@@ -975,7 +975,7 @@ Essa è una \emph{cella affine} di codimensione
 \[
 	\abs{\lambda} \deff \#\{\text{scatole in }\lambda\}\,.
 \]
-In particolare, la cella $C_{(0,\dots, 0)}$ ha dimensione massima. Se guardiamo a alla varietà di Grassmann come varietà algebrica con topologia di Zarinsky, $C_{(0,\dots, 0)}$ è ancora aperto. La varietà di Grassmann è quindi una varietà algebrica particolare: possiede un sottoinsieme aperto, e quindi Zarinskyi-denso, che è anche una sottovarietà algebrica affine.
+In particolare, la cella $X_{(0,\dots, 0)}$ ha dimensione massima. Se guardiamo a alla varietà di Grassmann come varietà algebrica con topologia di Zarinsky, $X_{(0,\dots, 0)}$ è ancora aperto. La varietà di Grassmann è quindi una varietà algebrica particolare: possiede un sottoinsieme aperto, e quindi Zarinskyi-denso, che è anche una sottovarietà algebrica affine.
 
 L'ordinamento delle tabelle di Young fornisce un ordinamento nelle celle della forma
 \[
@@ -1053,9 +1053,9 @@ In particolare, otteniamo un analogo diagramma se sostituiamo $X_\lambda$ con $X
 \end{tikzpicture}
 \end{center}
 
-Possiamo effettivamente visualizzare il collegamento tra forma di Gauss ridotta per righe e tabelle di Young. Supponiamo di voler considerare le celle di Schubert nello spazio $\Gr(\PP^k, \PP^n)$. Le relative tabelle di Young appartengono a $Y_{k,n}$, e sono quindi tabelle contenute in una griglia $A_{k,n}$ di forma $(k+1)\times (n-k)$. Una specifica forma di Gauss ridotta avrà degli $*$, che procediamo ad allineare sul lato destro di $A_{k,n}$. Il complementare, una volta riflessa sull'asse orizzontale, sarò la relativa la tabella di Young. 
+Possiamo effettivamente visualizzare il collegamento tra forma di Gauss ridotta per righe e tabelle di Young. Supponiamo di voler considerare le celle di Schubert nello spazio $\Gr(\PP^k, \PP^n)$. Le relative tabelle di Young appartengono a $Y_{k,n}$, e sono quindi tabelle contenute in una griglia $A_{k,n}$ di forma $(k+1)\times (n-k)$. Una specifica forma di Gauss ridotta avrà degli $*$, che procediamo ad allineare sul lato destro di $A_{k,n}$. Il complementare, una volta riflesso sull'asse orizzontale, sarà la relativa tabella di Young. 
 
-Per esempio, consideriamo la forma di Gauss in $\Gr(\PP^2, \PP^6)$
+Per esempio, consideriamo la forma di Gauss seguente, rappresentante un elemento di $\Gr(\PP^2, \PP^6)$
 \[
 	\begin{bmatrix}
 		0 & 1 & * & 0 & * & * & 0 \\
@@ -1073,7 +1073,7 @@ Parliamo ora della \emph{coomologia della Grassmanniana}. La sua descrizione è 
 \begin{Teo}
 	La coomologia di $\Gr(\PP^k_\C, \PP^n_\C)$ è zero in dimensione dispari, ed è
 	\[
-		\dim_\R\,H^{2i}(\Gr(\PP^k_\C, \PP^n_\C); \R) = \abs{\{\lambda \in Y_{k,n}\mid \lambda \text{ ha $2i$ scatole}\}}
+		\dim_\R\,H^{2i}(\Gr(\PP^k_\C, \PP^n_\C); \R) = \abs{\{\lambda \in Y_{k,n}\mid \abs{\lambda} = 2i\}}
 	\]
 	in dimensione pari.
 \end{Teo}
@@ -1082,11 +1082,11 @@ Parliamo ora della \emph{coomologia della Grassmanniana}. La sua descrizione è 
 	\[
 		X^{(2i)} \deff \bigcup_{\abs{\lambda} = 2i} \overline{X^0_\lambda},
 	\]
-	allora abbiamo una decomposizione $CW$
+	allora si può definire una decomposizione $CW$ di $\Gr(\PP^k, \PP^n)$ come segue:
 	\[	
-		X^{(0)} \subseteq \dots \subseteq X^{(2d)},\ d = \dim_\C \Gr(\PP^k, \PP^n)
+		X^{(0)} \subseteq \dots \subseteq X^{(2d)},\ d = \dim_\C \Gr(\PP^k, \PP^n)\,,
 	\]
-	con \emph{celle solo $\R$-dimensione pari}. Ma a questo punto sappiamo il complesso cellulare omologico su $\Z$ è della forma
+	con \emph{celle solamente in dimensione reale pari}. Ma a questo punto sappiamo il complesso cellulare omologico a coefficienti in $\Z$ è della forma
 	\[
 		0 \to \Z^{a_0} \overset{\partial}{\to} 0 \overset{\partial}{\to} \Z^{a_2} \overset{\partial}{\to} 0 \overset{\partial}{\to} \dots \overset{\partial}{\to} 0 \overset{\partial}{\to} \Z^{a_{2d}} \to 0 
 	\]
@@ -1098,16 +1098,16 @@ Parliamo ora della \emph{coomologia della Grassmanniana}. La sua descrizione è 
 	\[
 		H_{2i}(\Gr(\PP^k, \PP^n);\Z) = \Z^{a_{2i}}
 	\]
-	ed è nulla altrimenti. Per coefficienti univesali concludiamo:
+	ed è nulla altrimenti. Possiamo quindi concludere per il teorema dei coefficienti univesali:
 	\[
-		H^{2i}(\Gr(\PP^k_\C, \PP^n_\C); \R) = \Hom_\Z(H_{2i}(\Gr(\PP^k, \PP^n);\Z),\R) = \R^{a_{2i}}\,. \qedhere
+		H^{2i}(\Gr(\PP^k, \PP^n); \R) = \Hom_\Z(H_{2i}(\Gr(\PP^k, \PP^n);\Z),\R) = \R^{a_{2i}}\,. \qedhere
 	\]
 \end{proof}
 Per il teorema dei coefficienti universali, le dimensioni di 
 \[
 	\dim_\C\,H^{2i}(\Gr(\PP^k_\C, \PP^n_\C); \C)
 \]
-con quelle precedenti.
+coincidono con quelle precedenti.
 
 Per esempio
 \[
