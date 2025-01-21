@@ -781,7 +781,7 @@ D'ora in poi useremo la notazione a multiindice.
 	\begin{enumerate}
 		\item $f^\bot$ è un ideale omogeneo (i.e.\ è un sottomodulo graduato).
 		\item il \emph{zoccolo} $(f^\bot)_d$ ha $K$-codimensione 1.
-		\item Se $k > d$, allora $(f^\bot)_k = S^k V$.
+		\item Se $k > d$, allora $(f^\bot)_k = S^k V^\vee$.
 		\item L'algebra graduata
 		\[
 			A_f \deff SV^\vee/(f^\bot) = \bigoplus_{e = 0}^\infty S^eV^\vee/(f^\bot)_e\,.
@@ -792,7 +792,7 @@ D'ora in poi useremo la notazione a multiindice.
 \begin{Prop}
 	Sia $f \in S^d V$. Allora per ogni $e < d$ vale che
 	\[
-		(f^\bot)_e = [(f^\bot)_e \colon \MM^{d-2}]_e = \{g \in S_e \mid \forall h \in \MM^{d-e}\ (gh)\cdot f = 0\}\,.
+		(f^\bot)_e = [(f^\bot)_d \colon \MM^{d-2}]_e = \{g \in S_e \mid \forall h \in \MM^{d-e}\ (gh)\cdot f = 0\}\,.
 	\]
 \end{Prop}
 \begin{proof}
@@ -898,8 +898,9 @@ Una versione più generale, che introduce delle molteplicità, è data dall'enun
 \begin{Teo}[Lemma di Apolarità -- Versione Schematica]
 	Sia $Z \subseteq \PP V$ una un sottoschema chiuso zero-dimensionale, con ideale vanescente $I(Z) \subseteq S(V^\vee)$, e sia $v_d \colon \PP v \to \PP(S^dV)$ l'embedding di Veronese. Allora, per $f \in S^d V \setminus \{0\}$,
 	\[
-		I_Z \subseteq f^\bot\ \Rightarrow\ [f] \in \ang{v_d(Z)}
+		I_Z \subseteq f^\bot\ \Rightarrow\ [f] \in \overline{v_d(Z)}\,,
 	\]
+	dove $\overline{v_d(Z)}$ è la chiusura di Zarinsky di $v_d(Z)$ in $\PP(S^d V)$.
 \end{Teo}
 \section{Grassmaniane}
 Fissiamo un $\C$-spazio vettoriale $V$ di dimensione $n+1$.
@@ -1152,7 +1153,7 @@ allora
 	c_\lambda = \sum_{\sigma \in \Sigma_d} \sigma \qquad c_\mu = \sum_{\tau \in \Sigma_d}\epsilon(\tau)\tau
 \]
 
-I tableu permettono di classificare le rappresentazioni di $\Sigma_d$, cioè gli $\C \Sigma_d$-moduli irriducibili. Alcune sono immediate.
+I tableu permettono di classificare le rappresentazioni irriducibili di $\Sigma_d$, cioè gli $\C \Sigma_d$-moduli irriducibili. Alcuni sono immediati.
 \begin{enumerate}
 	\item $\Sigma_d$ agisce banalmente su $\C$.
 	\item $\Sigma_d$ agisce su $\C$ attraverso l'azione alternante: $\sigma \cdot v = \epsilon(\sigma)v$.
