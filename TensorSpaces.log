@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.15)  21 JAN 2025 18:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.27)  28 JAN 2025 10:06
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -32,7 +32,7 @@ Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@posthook=\toks18
 )
 (c:/texlive/2024/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2025/01/01 v25.1 The multilingual framework for pdfLaTeX, LuaLaT
+Package: babel 2025/01/25 v25.2 The multilingual framework for pdfLaTeX, LuaLaT
 eX and XeLaTeX
 \babel@savecnt=\count270
 \U@D=\dimen142
@@ -215,7 +215,7 @@ Package: amsthm 2020/05/29 v2.20.6
 \c@Def=\count296
 
 (c:/texlive/2024/texmf-dist/tex/latex/enumitem/enumitem.sty
-Package: enumitem 2019/06/20 v3.9 Customized lists
+Package: enumitem 2025/01/19 v3.10 Customized lists
 \labelindent=\skip62
 \enit@outerparindent=\dimen173
 \enit@toks=\toks32
@@ -1145,10 +1145,10 @@ Package logreq Info: Writing requests to 'TensorSpaces.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31324 strings out of 473207
- 582607 string characters out of 5720461
- 1405379 words of memory out of 5000000
- 53960 multiletter control sequences out of 15000+600000
+ 31327 strings out of 473207
+ 582660 string characters out of 5720461
+ 1405714 words of memory out of 5000000
+ 53963 multiletter control sequences out of 15000+600000
  578459 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,20n,107p,701b,1819s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1173,7 +1173,7 @@ per/sfrm0600.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm08
 dist/fonts/type1/public/cm-super/sfti0800.pfb><c:/texlive/2024/texmf-dist/fonts
 /type1/public/cm-super/sfti1095.pfb><c:/texlive/2024/texmf-dist/fonts/type1/pub
 lic/cm-super/sftt1095.pfb>
-Output written on TensorSpaces.pdf (24 pages, 435417 bytes).
+Output written on TensorSpaces.pdf (24 pages, 435606 bytes).
 PDF statistics:
  439 PDF objects out of 1000 (max. 8388607)
  363 compressed objects within 4 object streams
